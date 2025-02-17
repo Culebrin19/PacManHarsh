@@ -142,11 +142,11 @@ function draw() { // s'executa en bucle (no para)
   // }
   testFinishGame();
 
-  if (soundPacman.isPlaying() === false) {
-    soundPacman.play();
-  } else if (soundFood.isPlaying() === true) {
-    soundPacman.play();
-  }
+  // if (soundPacman.isPlaying() === false) {
+  //   soundPacman.play();
+  // } else if (soundFood.isPlaying() === true) {
+  //   soundPacman.play();
+  // }
 }
 
 function keyPressed() {
