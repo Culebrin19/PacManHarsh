@@ -2,21 +2,22 @@ import { GameObject } from "./classes/GameObject.js";
 import { Pacman } from "./classes/Pacman.js";
 import { Food } from "./classes/Food.js";
 import { ErrorPacman } from "./classes/ErrorPacman.js";
+import { Cherry } from "./classes/Cherry.js";
 
 const map = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 3, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1],
+  [1, 0, 0, 0, 2, 0, 0, 0, 2, 0, 4, 2, 0, 1],
   [1, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 2, 0, 0, 1, 0, 0, 2, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 1],
   [1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 2, 0, 2, 1, 2, 1, 1, 2, 0, 0, 0, 1],
+  [1, 4, 2, 0, 2, 1, 2, 1, 1, 2, 4, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1],
+  [1, 4, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 4, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
@@ -30,6 +31,7 @@ export let LIVES_PACMAN;
 
 let imgRock;
 let imgFood;
+let imgCireres;
 let soundFood;
 let soundPacman;
 let numberErrorSound;
@@ -46,12 +48,14 @@ const endTimeGame = 0;
 
 const arrRocks = [];
 const arrFood = [];
+const arrCireres = [];
 let numberImagesLoaded = 0;
 console.log("Boff");
 
 function preload() { // tot lo pesat a preload
   imgRock = loadImage("../img/roca.png", handleImage, handleError);
   imgFood = loadImage("../img/food.png", handleImage, handleError);
+  imgCireres = loadImage("../img/cireres.png", handleImage, handleError);
   imgPacManRigth = loadImage("../img/packRight.png", handleImage, handleError);
   imgPacManLeft = loadImage("../img/packLeft.png", handleImage, handleError);
   imgPacManUp = loadImage("../img/packUp.png", handleImage, handleError);
@@ -100,6 +104,10 @@ function setup() { // s'executa una vegada
       } else if (map[filaActual][columnaActual] === 3) {
         myPacman = new Pacman(filaActual, columnaActual);
         console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
+      } else if (map[filaActual][columnaActual] === 4) {
+        const cireres = new Cherry(filaActual, columnaActual);
+        console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
+        arrCireres.push(cireres);
       }
     }
     console.log(arrRocks.length);
@@ -123,10 +131,18 @@ for (let i = 0; i < arrFood.length; i++) {
   }
 }
 
+for (let i = 0; i < arrCireres.length; i++) {
+  if (myPacman.coordXPixels === arrCireres[i].coordXPixels && myPacman.coordYPixels === arrCireres[i].coordYPixels) {
+    myPacman.testCollideRock(arrCireres[i]);
+    soundFood.play();
+  }
+}
+
 function draw() { // s'executa en bucle (no para)
   background(171, 248, 168);
   arrRocks.forEach((roca) => roca.showObject(imgRock));
   arrFood.forEach((menjar) => menjar.showObject(imgFood));
+  arrCireres.forEach((cireres) => cireres.showObject(imgCireres));
   myPacman.showObject(imgPacManRigth);
   textSize(20);
   textAlign(LEFT, CENTER);
@@ -151,16 +167,16 @@ function draw() { // s'executa en bucle (no para)
 
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    myPacman.moveRight(arrFood, arrRocks);
+    myPacman.moveRight(arrFood, arrRocks, arrCireres);
     soundPacman.play();
   } else if (keyCode === LEFT_ARROW) {
-    myPacman.moveLeft(arrFood, arrRocks);
+    myPacman.moveLeft(arrFood, arrRocks, arrCireres);
     soundPacman.play();
   } else if (keyCode === UP_ARROW) {
-    myPacman.moveUp(arrFood, arrRocks);
+    myPacman.moveUp(arrFood, arrRocks, arrCireres);
     soundPacman.play();
   } else if (keyCode === DOWN_ARROW) {
-    myPacman.moveDown(arrFood, arrRocks);
+    myPacman.moveDown(arrFood, arrRocks, arrCireres);
     soundPacman.play();
   } else {
     console.log("Error de tecla");
@@ -183,7 +199,7 @@ function showError() {
 }
 
 function testFinishGame() {
-  if (arrFood.length === 0) {
+  if (arrFood.length === 0 || arrCireres.length === 0) {
     // alert("Fi del joc, has guanyat");
     // noLoop();
     // window.location.reload();
