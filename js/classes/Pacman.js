@@ -1,3 +1,4 @@
+// import { GameObject } from "./GameObject.js";
 import { GameObject } from "./GameObject.js";
 import { IMAGE_SIZE, WIDTH_CANVAS, HEIGHT_CANVAS, LIVES_PACMAN } from "../sketch.js";
 import { Food } from "./Food.js";
