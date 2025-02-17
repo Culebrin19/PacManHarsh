@@ -32,6 +32,7 @@ let imgRock;
 let imgFood;
 let soundFood;
 let soundPacman;
+let numberErrorSound;
 
 let imgPacManRigth;
 let imgPacManLeft;
@@ -48,19 +49,28 @@ const arrFood = [];
 let numberImagesLoaded = 0;
 console.log("Boff");
 
-function preload() {
-  imgRock = loadImage("/img/roca.png", handleImage, handleError);
-  imgFood = loadImage("/img/food.png", handleImage, handleError);
-  imgPacManRigth = loadImage("/img/packRight.png", handleImage, handleError);
-  imgPacManLeft = loadImage("/img/packLeft.png", handleImage, handleError);
-  imgPacManUp = loadImage("/img/packUp.png", handleImage, handleError);
-  imgPacManDown = loadImage("/img/packDown.png", handleImage, handleError);
-  soundFood = loadSound("/img/sounds/pacman_eatfruit.wav");
-  soundPacman = loadSound("/img/sounds/pacman.mp3");
+function preload() { // tot lo pesat a preload
+  imgRock = loadImage("../img/roca.png", handleImage, handleError);
+  imgFood = loadImage("../img/food.png", handleImage, handleError);
+  imgPacManRigth = loadImage("../img/packRight.png", handleImage, handleError);
+  imgPacManLeft = loadImage("../img/packLeft.png", handleImage, handleError);
+  imgPacManUp = loadImage("../img/packUp.png", handleImage, handleError);
+  imgPacManDown = loadImage("../img/packDown.png", handleImage, handleError);
+  soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
+  soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
+}
+
+function handleSound() {
+  console.error("S'ha carregat correctament el so");
+}
+
+function handleErrorSound() {
+  console.error("S'ha produit un errror al carregar el so");
+  numberErrorSound++;
 }
 
 function handleError() {
-  console.error("Error carregar imatge");
+  console.error("Error al carregar imatge");
   try {
     throw new ErrorPacman(2, "Error carregar imatge");
   } catch (error) {
@@ -75,6 +85,7 @@ function handleImage() {
 }
 
 function setup() { // s'executa una vegada
+  // numberImagesLoaded = 4; i numberErrorSound = 0;
   createCanvas(WIDTH_CANVAS, HEIGHT_CANVAS + extraSize).parent("sketch-pacman");
   for (let filaActual = 0; filaActual < ROWS; filaActual++) {
     for (let columnaActual = 0; columnaActual < COLUMNS; columnaActual++) {
@@ -130,6 +141,12 @@ function draw() { // s'executa en bucle (no para)
   // case 4: myPacman.showObject(imgPacManDown); break;
   // }
   testFinishGame();
+
+  if (soundPacman.isPlaying() === false) {
+    soundPacman.play();
+  } else if (soundFood.isPlaying() === true) {
+    soundPacman.play();
+  }
 }
 
 function keyPressed() {
