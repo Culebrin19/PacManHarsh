@@ -251,7 +251,7 @@ function showError() {
  * Pot acabar quan no queda més food, quan arriba al temps indicat o quan es queda sense vides.
  */
 function testFinishGame() {
-  if (arrFood.length === 0 || arrCireres.length === 0) {
+  if (arrFood.length === 0 && arrCireres.length === 0) {
     // alert("Fi del joc, has guanyat");
     // noLoop();
     // window.location.reload();
