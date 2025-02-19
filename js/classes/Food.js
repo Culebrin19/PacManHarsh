@@ -1,5 +1,8 @@
 import { GameObject } from "./GameObject.js";
 
+/**
+ * @class Food és una classe filla de GameObject que representa el menjar del joc i "controla" el tema de punts del food.
+ */
 export class Food extends GameObject {
   constructor(y, x) {
     super(y, x);

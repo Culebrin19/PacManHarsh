@@ -1,5 +1,8 @@
 import { Food } from "./Food.js";
 
+/**
+ * @class Cherry és una classe filla de Food que representa les cireres del joc i "controla" el tema de punts de les cireres.
+ */
 export class Cherry extends Food {
   constructor(y, x) {
     super(y, x);

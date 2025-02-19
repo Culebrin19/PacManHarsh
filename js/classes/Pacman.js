@@ -15,6 +15,13 @@ export class Pacman extends GameObject {
     this.pacmanDiametre = 32;
   }
 
+  /**
+   * @function moveRight mou el pacman cap a la dreta i comprova si colisiona amb una roca o si es menja un food.
+   * Té els següents parametres:
+   * @param arrFood
+   * @param arrRocks
+   * @param arrCireres
+   */
   moveRight(arrFood, arrRocks, arrCireres) {
     const temp = this.coordXPixels + this.speedPacman;
     if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
@@ -26,6 +33,13 @@ export class Pacman extends GameObject {
     }
   }
 
+  /**
+   * @function moveLeft mou el pacman cap a l'esquerra i comprova si colisiona amb una roca o si es menja un food.
+   * Té els següents parametres:
+   * @param arrFood
+   * @param arrRocks
+   * @param arrCireres
+   */
   moveLeft(arrFood, arrRocks, arrCireres) {
     const temp = this.coordXPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
@@ -37,6 +51,13 @@ export class Pacman extends GameObject {
     }
   }
 
+  /**
+   * @function moveUp mou el pacman cap a dalt i comprova si colisiona amb una roca o si es menja un food.
+   * Té els següents parametres:
+   * @param arrFood
+   * @param arrRocks
+   * @param arrCireres
+   */
   moveUp(arrFood, arrRocks, arrCireres) {
     const temp = this.coordYPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
@@ -48,6 +69,13 @@ export class Pacman extends GameObject {
     }
   }
 
+  /**
+   * @function moveDown mou el pacman cap a baix i comprova si colisiona amb una roca o si es menja un food.
+   * Té els següents parametres:
+   * @param arrFood
+   * @param arrRocks
+   * @param arrCireres
+   */
   moveDown(arrFood, arrRocks, arrCireres) {
     const temp = this.coordYPixels + this.speedPacman;
     if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
@@ -59,6 +87,16 @@ export class Pacman extends GameObject {
     }
   }
 
+  /**
+   * @function testCollideRock comprova si el pacman colisiona amb una roca.
+   * En el cas de que si, mostra un missatge per consola de que ha colissionat amb una roca i el mou a la posicio inicial.
+   * Apart d'això, li resta una vida.
+   * Té els següents parametres:
+   * @param arrRocks
+   * @param newX
+   * @param newY
+   * @returns {boolean}
+   */
   testCollideRock(arrRocks, newX, newY) {
     for (const roca of arrRocks) {
       if (newX === roca.coordXPixels && newY === roca.coordYPixels) {
@@ -82,6 +120,13 @@ export class Pacman extends GameObject {
   //   }
   // }
 
+  /**
+   * @function eatFood comprova si el pacman ha menjat un food o una cirera.
+   * En el cas de que sigui un food, mostra un missatge per consola de que ha menjat un food/cirera i suma la puntuació.
+   * Té els següents parametres:
+   * @param arrFood
+   * @param arrCireres
+   */
   eatFood(arrFood, arrCireres) {
     for (let i = 0; i < arrFood.length; i++) {
       if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {

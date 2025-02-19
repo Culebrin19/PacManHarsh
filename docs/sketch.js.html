@@ -1,4 +1,69 @@
-import { GameObject } from "./classes/GameObject.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>sketch.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#eatFoodcomprovasielpacmanhamenjatunfoodounacirera.Enelcasdequesiguiunfood,mostraunmissatgeperconsoladequehamenjatunfood/cireraisumalapuntuaci%25C3%25B3.T%25C3%25A9elsseg%25C3%25BCentsparametres:">eatFood comprova si el pacman ha menjat un food o una cirera.
+En el cas de que sigui un food, mostra un missatge per consola de que ha menjat un food/cirera i suma la puntuació.
+Té els següents parametres:</a></li><li><a href="global.html#handleErrormostraunmissatgeperconsolasis'haproduitunerroralcarregarlaimatge">handleError mostra un missatge per consola si s'ha produit un error al carregar la imatge</a></li><li><a href="global.html#handleErrorSoundmostraunmissatgeperconsolasis'haproduitunerroralcarregarelso">handleErrorSound mostra un missatge per consola si s'ha produit un error al carregar el so</a></li><li><a href="global.html#handleImagemostraunmissatgeperconsolasis'hacarregatcorrectamentlaimatge">handleImage mostra un missatge per consola si s'ha carregat correctament la imatge</a></li><li><a href="global.html#handleSoundmostraunmissatgeperconsolasis'hacarregatcorrectamentelso">handleSound mostra un missatge per consola si s'ha carregat correctament el so</a></li><li><a href="global.html#keyPressedpermetmoureelpacmanenlesbasealesteclesqueesprem.Siespremalgunaquenoes,mostraunerrorperconsola.">keyPressed permet moure el pacman en les base a les tecles que es prem.
+Si es prem alguna que no es, mostra un error per consola.</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#moveDownmouelpacmancapabaixicomprovasicolisionaambunarocaosiesmenjaunfood.T%25C3%25A9elsseg%25C3%25BCentsparametres:">moveDown mou el pacman cap a baix i comprova si colisiona amb una roca o si es menja un food.
+Té els següents parametres:</a></li><li><a href="global.html#moveLeftmouelpacmancapal'esquerraicomprovasicolisionaambunarocaosiesmenjaunfood.T%25C3%25A9elsseg%25C3%25BCentsparametres:">moveLeft mou el pacman cap a l'esquerra i comprova si colisiona amb una roca o si es menja un food.
+Té els següents parametres:</a></li><li><a href="global.html#moveRightmouelpacmancapaladretaicomprovasicolisionaambunarocaosiesmenjaunfood.T%25C3%25A9elsseg%25C3%25BCentsparametres:">moveRight mou el pacman cap a la dreta i comprova si colisiona amb una roca o si es menja un food.
+Té els següents parametres:</a></li><li><a href="global.html#moveUpmouelpacmancapadalticomprovasicolisionaambunarocaosiesmenjaunfood.T%25C3%25A9elsseg%25C3%25BCentsparametres:">moveUp mou el pacman cap a dalt i comprova si colisiona amb una roca o si es menja un food.
+Té els següents parametres:</a></li><li><a href="global.html#preloadcarregatoteslesimatgesielssonsdeljoc">preload carrega totes les imatges i els sons del joc</a></li><li><a href="global.html#setupinicialitzaeljocunasolavegada.Crealesroques,elfood,elpacmanilescireres,mirantlaposicoperlaqualvaienbasealn%25C3%25BAmeroqueest%25C3%25A0assignat,ficaunaimatgeounaaltra.Tamb%25C3%25A9comen%25C3%25A7aeltempsdeljoc.">setup inicialitza el joc una sola vegada.
+Crea les roques, el food, el pacman i les cireres, mirant la posico per la qual va i en base
+al número que està assignat, fica una imatge o una altra .
+També comença el temps del joc.</a></li><li><a href="global.html#showErrormostraunaimatged'errorencasdequenoespuguicarregarunaimatge.">showError mostra una imatge d'error en cas de que no es pugui carregar una imatge.</a></li><li><a href="global.html#testCollideCherrycomprovasielpacmancolisionaambunacirera.Igualqueenlafunci%25C3%25B3anterior,alcolissionarmostraunerrorieliminalacireradelaposicioquehacolisionat.">testCollideCherry comprova si el pacman colisiona amb una cirera. Igual que en la funció anterior,
+al colissionar mostra un error i elimina la cirera de la posicio que ha colisionat.</a></li><li><a href="global.html#testCollideFoodcomprovasielpacmancolisionaambunmenjar.Enelcasdequesisi,mostraunmissatgeperconsoladequehacolissionatambunmenjarieliminaelfoodenlaposicioquehacolisionat.">testCollideFood comprova si el pacman colisiona amb un menjar.
+En el cas de que si si, mostra un missatge per consola de que ha colissionat amb un menjar
+i elimina el food en la posicio que ha colisionat.</a></li><li><a href="global.html#testCollideRockcomprovasielpacmancolisionaambunaroca.Enelcasdequesi,mostraunmissatgeperconsoladequehacolissionatambunarocaielmoualaposicioinicial.Apartd'aix%25C3%25B2,lirestaunavida.T%25C3%25A9elsseg%25C3%25BCentsparametres:">testCollideRock comprova si el pacman colisiona amb una roca.
+En el cas de que si, mostra un missatge per consola de que ha colissionat amb una roca i el mou a la posicio inicial.
+Apart d'això, li resta una vida.
+Té els següents parametres:</a></li><li><a href="global.html#testCollideRockcomprovasielpacmancolisionaambunaroca.Enelcasdequesi,mostraunmissatgeperconsoladequehacolissionatambunaroca.">testCollideRock comprova si el pacman colisiona amb una roca.
+En el cas de que si, mostra un missatge per consola de que ha colissionat amb una roca.</a></li><li><a href="global.html#testFinishGamecomprovasieljochaacabat.Potacabarquannoquedam%25C3%25A9sfood,quanarribaaltempsindicatoquanesquedasensevides.">testFinishGame comprova si el joc ha acabat.
+Pot acabar quan no queda més food, quan arriba al temps indicat o quan es queda sense vides.</a></li><li><a href="global.html#testFinishGameescridapercomprovarsieljochaacabat.">testFinishGame es crida per comprovar si el joc ha acabat.</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">sketch.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { GameObject } from "./classes/GameObject.js";
 import { Pacman } from "./classes/Pacman.js";
 import { Food } from "./classes/Food.js";
 import { ErrorPacman } from "./classes/ErrorPacman.js";
@@ -115,8 +180,8 @@ function handleImage() {
 function setup() { // s'executa una vegada
   // numberImagesLoaded = 4; i numberErrorSound = 0;
   createCanvas(WIDTH_CANVAS, HEIGHT_CANVAS + extraSize).parent("sketch-pacman");
-  for (let filaActual = 0; filaActual < ROWS; filaActual++) {
-    for (let columnaActual = 0; columnaActual < COLUMNS; columnaActual++) {
+  for (let filaActual = 0; filaActual &lt; ROWS; filaActual++) {
+    for (let columnaActual = 0; columnaActual &lt; COLUMNS; columnaActual++) {
       if (map[filaActual][columnaActual] === 1) {
         const roca = new GameObject(filaActual, columnaActual);
         console.log(`He creat roca a posicio fila ${filaActual}i columna ${columnaActual}`);
@@ -144,8 +209,8 @@ function setup() { // s'executa una vegada
  * En el cas de que si, mostra un missatge per consola de que ha colissionat amb una roca.
  */
 if (myPacman) {
-  for (let i = 0; i < arrRocks.length; i++) {
-    if (myPacman.coordXPixels === arrRocks[i].coordXPixels && myPacman.coordYPixels === arrRocks[i].coordYPixels) {
+  for (let i = 0; i &lt; arrRocks.length; i++) {
+    if (myPacman.coordXPixels === arrRocks[i].coordXPixels &amp;&amp; myPacman.coordYPixels === arrRocks[i].coordYPixels) {
       console.log("Error, colisiona amb una roca");
     }
   }
@@ -156,8 +221,8 @@ if (myPacman) {
  * En el cas de que si si, mostra un missatge per consola de que ha colissionat amb un menjar
  * i elimina el food en la posicio que ha colisionat.
  */
-for (let i = 0; i < arrFood.length; i++) {
-  if (myPacman.coordXPixels === arrFood[i].coordXPixels && myPacman.coordYPixels === arrFood[i].coordYPixels) {
+for (let i = 0; i &lt; arrFood.length; i++) {
+  if (myPacman.coordXPixels === arrFood[i].coordXPixels &amp;&amp; myPacman.coordYPixels === arrFood[i].coordYPixels) {
     myPacman.testCollideRock(arrFood[i]);
     soundFood.play();
   }
@@ -167,8 +232,8 @@ for (let i = 0; i < arrFood.length; i++) {
  * @function testCollideCherry comprova si el pacman colisiona amb una cirera. Igual que en la funció anterior,
  * al colissionar mostra un error i elimina la cirera de la posicio que ha colisionat.
  */
-for (let i = 0; i < arrCireres.length; i++) {
-  if (myPacman.coordXPixels === arrCireres[i].coordXPixels && myPacman.coordYPixels === arrCireres[i].coordYPixels) {
+for (let i = 0; i &lt; arrCireres.length; i++) {
+  if (myPacman.coordXPixels === arrCireres[i].coordXPixels &amp;&amp; myPacman.coordYPixels === arrCireres[i].coordYPixels) {
     myPacman.testCollideRock(arrCireres[i]);
     soundFood.play();
   }
@@ -276,3 +341,28 @@ globalThis.setup = setup;
 globalThis.draw = draw;
 globalThis.preload = preload;
 globalThis.keyPressed = keyPressed;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Wed Feb 19 2025 11:16:58 GMT+0100 (Hora estàndard d’Europa central) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
