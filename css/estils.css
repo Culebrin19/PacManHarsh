@@ -1,0 +1,96 @@
+/* html, body{
+  min-height: 100vh;
+} */
+
+menu{
+  display:flex;
+  justify-content: center;
+}
+
+.menu ul {
+    list-style-type: none;
+    overflow: hidden;
+     margin: 0px;
+    padding: 15px; 
+    background-color: aquamarine;  
+    border: 2px black solid;
+}
+
+.menu li {
+    float: left;
+    border: 2px red solid;
+    margin-left: 30px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    padding: 14px;
+}
+
+.menu li:hover{
+  background-color: black;
+}
+
+.menu a:hover{
+  color:white ;
+}
+
+.text{
+  text-align: center;
+  height: 200px;
+}
+
+body{
+  background-color: bisque;
+  position: relative;
+}
+
+/* .container{
+  min-height: calc(100vh - 80px);
+  overflow-y:auto ;
+} */
+
+footer{
+  border-top: 6px solid black;
+  /* margin-top: 24%; */
+  /* position: relative;
+  bottom: 0; */
+  font-size: 30px;
+  height: 80px;
+}
+
+#footer{
+   margin-top: 25%;
+}
+
+#index{
+  margin-top: 25%;
+}
+
+#experiencia{
+  margin-top: 7%;
+}
+
+@media only screen and (max-width: 412px) {
+  body {background: red;
+  }
+  .menu {display: flex;
+        flex-direction: column;
+  }
+  .menu li {float: none; 
+    margin-right: 1.5rem;
+  }
+  
+  #index{
+    margin-top: 23rem;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  body{
+    background-color: bisque;
+  }
+}
