@@ -35,7 +35,6 @@ export let LIVES_PACMAN;
 
 let imgRock;
 let imgEsferas;
-let imgCireres;
 let soundFood;
 let soundPacman;
 let numberErrorSound;
@@ -61,11 +60,10 @@ console.log("Boff");
  * @function preload carrega totes les imatges i els sons del joc
  */
 function preload() { // tot lo pesat a preload
-  // imgRock = loadImage("../img/roca.png", handleImage, handleError);
-  // imgEsferas = loadImage("../img/esferas.png", handleImage, handleError);
-  // imgCireres = loadImage("../img/cireres.png", handleImage, handleError);
-  // imgGoku = loadImage("../img/goku.png", handleImage, handleError);
-  // imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
+  imgRock = loadImage("../img/roca.png", handleImage, handleError);
+  imgEsferas = loadImage("../img/esferas.png", handleImage, handleError);
+  imgGoku = loadImage("../img/goku.png", handleImage, handleError);
+  imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
   // soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   // soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
   // imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
@@ -116,31 +114,31 @@ function preload() { // tot lo pesat a preload
 function setup() { // s'executa una vegada
   // numberImagesLoaded = 4; i numberErrorSound = 0;
   createCanvas(WIDTH_CANVAS, HEIGHT_CANVAS + extraSize).parent("sketch-pacman");
-  // for (let filaActual = 0; filaActual < ROWS; filaActual++) {
-  //   for (let columnaActual = 0; columnaActual < COLUMNS; columnaActual++) {
-  //     if (map[filaActual][columnaActual] === 1) {
-  //       const roca = new GameObject(filaActual, columnaActual);
-  //       console.log(`He creat roca a posicio fila ${filaActual}i columna ${columnaActual}`);
-  //       arrRocks.push(roca);
-  //     } else if (map[filaActual][columnaActual] === 2) {
-  //       const menjar = new Food(filaActual, columnaActual); // GameObject(filaActual, columnaActual);
-  //       console.log(`He creat food a posicio fila ${filaActual}i columna ${columnaActual}`);
-  //       arrFood.push(menjar);
-  //     } else if (map[filaActual][columnaActual] === 3) {
-  //       myGoku = new Goku(filaActual, columnaActual);
-  //       console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
-  //     } else if (map[filaActual][columnaActual] === 11) {
-  //       const freezer = new Freezer(filaActual, columnaActual);
-  //       console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
-  //       arrFreezer.push(freezer);
-  //     } else if (map[filaActual][columnaActual] === 6) {
-  //       myGoku = new Goku(filaActual, columnaActual);
-  //       const powerUp = new PowerUp(filaActual, columnaActual);
-  //       arrPowerUp.push(powerUp);
-  //     }
-  //   }
-  //   // console.log(arrRocks.length);
-  // }
+  for (let filaActual = 0; filaActual < ROWS; filaActual++) {
+    for (let columnaActual = 0; columnaActual < COLUMNS; columnaActual++) {
+      if (map[filaActual][columnaActual] === 1) {
+        const roca = new GameObject(filaActual, columnaActual);
+        console.log(`He creat roca a posicio fila ${filaActual}i columna ${columnaActual}`);
+        arrRocks.push(roca);
+      } else if (map[filaActual][columnaActual] === 2) {
+        const menjar = new Food(filaActual, columnaActual); // GameObject(filaActual, columnaActual);
+        console.log(`He creat food a posicio fila ${filaActual}i columna ${columnaActual}`);
+        arrFood.push(menjar);
+      } else if (map[filaActual][columnaActual] === 3) {
+        myGoku = new Goku(filaActual, columnaActual);
+        console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
+      } else if (map[filaActual][columnaActual] === 11) {
+        const freezer = new Freezer(filaActual, columnaActual);
+        console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
+        arrFreezer.push(freezer);
+      } else if (map[filaActual][columnaActual] === 6) {
+        myGoku = new Goku(filaActual, columnaActual);
+        const powerUp = new PowerUp(filaActual, columnaActual);
+        arrPowerUp.push(powerUp);
+      }
+    }
+    // console.log(arrRocks.length);
+  }
   // startTimeGame = millis();
 }
 
@@ -161,12 +159,12 @@ function setup() { // s'executa una vegada
  * En el cas de que si si, mostra un missatge per consola de que ha colissionat amb un menjar
  * i elimina el food en la posicio que ha colisionat.
  */
-// for (let i = 0; i < arrFood.length; i++) {
-//   if (myGoku.coordXPixels === arrFood[i].coordXPixels && myGoku.coordYPixels === arrFood[i].coordYPixels) {
-//     myGoku.testCollideRock(arrFood[i]);
-//     soundFood.play();
-//   }
-// }
+for (let i = 0; i < arrFood.length; i++) {
+  if (myGoku.coordXPixels === arrFood[i].coordXPixels && myGoku.coordYPixels === arrFood[i].coordYPixels) {
+    myGoku.testCollideRock(arrFood[i]);
+    soundFood.play();
+  }
+}
 
 // for (let i = 0; i < arrPowerUp.length; i++) {
 //   if (myGoku.coordXPixels === arrPowerUp[i].coordXPixels && myGoku.coordYPixels === arrPowerUp[i].coordYPixels) {
@@ -179,12 +177,12 @@ function setup() { // s'executa una vegada
  * @function testCollideCherry comprova si el pacman colisiona amb una cirera. Igual que en la funció anterior,
  * al colissionar mostra un error i elimina la cirera de la posicio que ha colisionat.
  */
-// for (let i = 0; i < arrFreezer.length; i++) {
-//   if (myGoku.coordXPixels === arrFreezer[i].coordXPixels && myGoku.coordYPixels === arrFreezer[i].coordYPixels) {
-//     myGoku.testCollideRock(arrFreezer[i]);
-//     soundFood.play();
-//   }
-// }
+for (let i = 0; i < arrFreezer.length; i++) {
+  if (myGoku.coordXPixels === arrFreezer[i].coordXPixels && myGoku.coordYPixels === arrFreezer[i].coordYPixels) {
+    myGoku.testCollideRock(arrFreezer[i]);
+    soundFood.play();
+  }
+}
 
 /**
  * @function draw s'executa en bucle (no para) i pinta tots els objectes del joc.
@@ -193,12 +191,12 @@ function setup() { // s'executa una vegada
  */
 function draw() {
   background(171, 248, 168);
-  // arrRocks.forEach((roca) => roca.showObject(imgRock));
-  // arrFood.forEach((menjar) => menjar.showObject(imgEsferas));
-  // arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
-  // myGoku.showObject(imgGoku);
-  // arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
-  // arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
+  arrRocks.forEach((roca) => roca.showObject(imgRock));
+  arrFood.forEach((menjar) => menjar.showObject(imgEsferas));
+  arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
+  myGoku.showObject(imgGoku);
+  arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
+  arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
   // textSize(20);
   // textAlign(LEFT, CENTER);
   // timer = floor((millis() - startTimeGame) / 1000);
