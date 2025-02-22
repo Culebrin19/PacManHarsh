@@ -20,16 +20,16 @@ export class Pacman extends GameObject {
    * Té els següents parametres:
    * @param arrFood
    * @param arrRocks
-   * @param arrCireres
+   * @param arrFreezer
    */
-  moveRight(arrFood, arrRocks, arrCireres) {
+  moveRight(arrFood, arrRocks, arrFreezer) {
     const temp = this.coordXPixels + this.speedPacman;
     if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
       console.log("Error, no es pot moure a la dreta");
     } else {
       this.direction = 1;
       this.coordXPixels = temp;
-      this.eatFood(arrFood, arrCireres);
+      this.eatFood(arrFood, arrFreezer);
     }
   }
 
@@ -38,16 +38,16 @@ export class Pacman extends GameObject {
    * Té els següents parametres:
    * @param arrFood
    * @param arrRocks
-   * @param arrCireres
+   * @param arrFreezer
    */
-  moveLeft(arrFood, arrRocks, arrCireres) {
+  moveLeft(arrFood, arrRocks, arrFreezer) {
     const temp = this.coordXPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
       console.log("Error, no es pot moure a l'esquerra");
     } else {
       this.direction = 3;
       this.coordXPixels = temp;
-      this.eatFood(arrFood, arrCireres);
+      this.eatFood(arrFood, arrFreezer);
     }
   }
 
@@ -56,16 +56,16 @@ export class Pacman extends GameObject {
    * Té els següents parametres:
    * @param arrFood
    * @param arrRocks
-   * @param arrCireres
+   * @param arrFreezer
    */
-  moveUp(arrFood, arrRocks, arrCireres) {
+  moveUp(arrFood, arrRocks, arrFreezer) {
     const temp = this.coordYPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
       console.log("Error, no es pot moure a dalt");
     } else {
       this.direction = 2;
       this.coordYPixels = temp;
-      this.eatFood(arrFood, arrCireres);
+      this.eatFood(arrFood, arrFreezer);
     }
   }
 
@@ -74,16 +74,16 @@ export class Pacman extends GameObject {
    * Té els següents parametres:
    * @param arrFood
    * @param arrRocks
-   * @param arrCireres
+   * @param arrFreezer
    */
-  moveDown(arrFood, arrRocks, arrCireres) {
+  moveDown(arrFood, arrRocks, arrFreezer) {
     const temp = this.coordYPixels + this.speedPacman;
     if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
       console.log("Error, no es pot moure a baix");
     } else {
       this.direction = 4;
       this.coordYPixels = temp;
-      this.eatFood(arrFood, arrCireres);
+      this.eatFood(arrFood, arrFreezer);
     }
   }
 
@@ -125,9 +125,9 @@ export class Pacman extends GameObject {
    * En el cas de que sigui un food, mostra un missatge per consola de que ha menjat un food/cirera i suma la puntuació.
    * Té els següents parametres:
    * @param arrFood
-   * @param arrCireres
+   * @param arrFreezer
    */
-  eatFood(arrFood, arrCireres) {
+  eatFood(arrFood, arrFreezer) {
     for (let i = 0; i < arrFood.length; i++) {
       if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {
         console.log("Has menjat food");
@@ -138,11 +138,11 @@ export class Pacman extends GameObject {
       }
     }
 
-    for (let i = 0; i < arrCireres.length; i++) {
-      if (this.coordXPixels === arrCireres[i].coordXPixels && this.coordYPixels === arrCireres[i].coordYPixels) {
+    for (let i = 0; i < arrFreezer.length; i++) {
+      if (this.coordXPixels === arrFreezer[i].coordXPixels && this.coordYPixels === arrFreezer[i].coordYPixels) {
         console.log("Has menjat una cirera");
-        this.score += arrCireres[i].pointsCherry;
-        arrCireres.splice(i, 1);
+        this.score += arrFreezer[i].pointsCherry;
+        arrFreezer.splice(i, 1);
         console.log(`Puntuació actual: ${this.score}`);
         break;
       }

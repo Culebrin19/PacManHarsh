@@ -10,18 +10,18 @@ import { PowerUp } from "./classes/PowerUp.js";
  */
 const map = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 3, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 2, 0, 0, 0, 2, 0, 4, 2, 0, 1],
-  [1, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 6, 0, 0, 1],
-  [1, 0, 0, 2, 0, 0, 1, 0, 0, 2, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 1],
+  [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 11, 2, 0, 1],
+  [1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 11, 0, 0, 6, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 14, 1],
+  [1, 11, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 4, 2, 0, 2, 1, 2, 1, 1, 2, 4, 0, 0, 1],
+  [1, 11, 0, 0, 2, 1, 0, 1, 1, 0, 11, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 4, 1],
+  [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 2, 0, 2, 0, 0, 0, 0, 11, 0, 2, 4, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
@@ -34,16 +34,14 @@ const extraSize = 80;
 export let LIVES_PACMAN;
 
 let imgRock;
-let imgFood;
+let imgEsferas;
 let imgCireres;
 let soundFood;
 let soundPacman;
 let numberErrorSound;
 
-let imgPacManRigth;
-let imgPacManLeft;
-let imgPacManUp;
-let imgPacManDown;
+let imgGoku;
+let imgFreezer;
 let myPacman;
 let imgPowerUp;
 const timerSecond = 0;
@@ -55,6 +53,7 @@ const arrRocks = [];
 const arrFood = [];
 const arrCireres = [];
 const arrPowerUp = [];
+const arrFreezer = [];
 let numberImagesLoaded = 0;
 console.log("Boff");
 
@@ -63,12 +62,13 @@ console.log("Boff");
  */
 function preload() { // tot lo pesat a preload
   imgRock = loadImage("../img/roca.png", handleImage, handleError);
-  imgFood = loadImage("../img/food.png", handleImage, handleError);
+  imgEsferas = loadImage("../img/esferas.png", handleImage, handleError);
   imgCireres = loadImage("../img/cireres.png", handleImage, handleError);
-  imgPacManRigth = loadImage("../img/packRight.png", handleImage, handleError);
-  imgPacManLeft = loadImage("../img/packLeft.png", handleImage, handleError);
-  imgPacManUp = loadImage("../img/packUp.png", handleImage, handleError);
-  imgPacManDown = loadImage("../img/packDown.png", handleImage, handleError);
+  imgGoku = loadImage("../img/goku.png", handleImage, handleError);
+  imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
+  // imgPacManLeft = loadImage("../img/packLeft.png", handleImage, handleError);
+  // imgPacManUp = loadImage("../img/packUp.png", handleImage, handleError);
+  // imgPacManDown = loadImage("../img/packDown.png", handleImage, handleError);
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
   imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
@@ -132,10 +132,10 @@ function setup() { // s'executa una vegada
       } else if (map[filaActual][columnaActual] === 3) {
         myPacman = new Pacman(filaActual, columnaActual);
         console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
-      } else if (map[filaActual][columnaActual] === 4) {
-        const cireres = new Cherry(filaActual, columnaActual);
+      } else if (map[filaActual][columnaActual] === 11) {
+        const freezer = new Cherry(filaActual, columnaActual);
         console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
-        arrCireres.push(cireres);
+        arrFreezer.push(freezer);
       } else if (map[filaActual][columnaActual] === 6) {
         myPacman = new Pacman(filaActual, columnaActual);
         const powerUp = new PowerUp(filaActual, columnaActual);
@@ -182,9 +182,9 @@ for (let i = 0; i < arrPowerUp.length; i++) {
  * @function testCollideCherry comprova si el pacman colisiona amb una cirera. Igual que en la funció anterior,
  * al colissionar mostra un error i elimina la cirera de la posicio que ha colisionat.
  */
-for (let i = 0; i < arrCireres.length; i++) {
-  if (myPacman.coordXPixels === arrCireres[i].coordXPixels && myPacman.coordYPixels === arrCireres[i].coordYPixels) {
-    myPacman.testCollideRock(arrCireres[i]);
+for (let i = 0; i < arrFreezer.length; i++) {
+  if (myPacman.coordXPixels === arrFreezer[i].coordXPixels && myPacman.coordYPixels === arrFreezer[i].coordYPixels) {
+    myPacman.testCollideRock(arrFreezer[i]);
     soundFood.play();
   }
 }
@@ -197,29 +197,18 @@ for (let i = 0; i < arrCireres.length; i++) {
 function draw() {
   background(171, 248, 168);
   arrRocks.forEach((roca) => roca.showObject(imgRock));
-  arrFood.forEach((menjar) => menjar.showObject(imgFood));
-  arrCireres.forEach((cireres) => cireres.showObject(imgCireres));
-  myPacman.showObject(imgPacManRigth);
+  arrFood.forEach((menjar) => menjar.showObject(imgEsferas));
+  arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
+  myPacman.showObject(imgGoku);
   arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
+  arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
   textSize(20);
   textAlign(LEFT, CENTER);
   timer = floor((millis() - startTimeGame) / 1000);
-  // timerSecond = timer / 1000;
   text(`Puntuació: ${myPacman.score}`, 10, HEIGHT_CANVAS + 30);
   text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
-  // switch (myPacman.direction) {
-  // case 1: myPacman.showObject(imgPacManRigth); break;
-  // case 2: myPacman.showObject(imgPacManLeft); break;
-  // case 3: myPacman.showObject(imgPacManUp); break;
-  // case 4: myPacman.showObject(imgPacManDown); break;
-  // }
-  testFinishGame();
 
-  // if (soundPacman.isPlaying() === false) {
-  //   soundPacman.play();
-  // } else if (soundFood.isPlaying() === true) {
-  //   soundPacman.play();
-  // }
+  testFinishGame();
 }
 
 /**
@@ -228,16 +217,16 @@ function draw() {
  */
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    myPacman.moveRight(arrFood, arrRocks, arrCireres, arrPowerUp);
+    myPacman.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === LEFT_ARROW) {
-    myPacman.moveLeft(arrFood, arrRocks, arrCireres, arrPowerUp);
+    myPacman.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === UP_ARROW) {
-    myPacman.moveUp(arrFood, arrRocks, arrCireres, arrPowerUp);
+    myPacman.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === DOWN_ARROW) {
-    myPacman.moveDown(arrFood, arrRocks, arrCireres, arrPowerUp);
+    myPacman.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else {
     console.log("Error de tecla");
