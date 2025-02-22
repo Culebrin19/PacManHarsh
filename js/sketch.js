@@ -1,5 +1,5 @@
 import { GameObject } from "./classes/GameObject.js";
-import { Pacman } from "./classes/Pacman.js";
+import { Goku } from "./classes/Goku.js";
 import { Food } from "./classes/Food.js";
 import { ErrorPacman } from "./classes/ErrorPacman.js";
 import { Freezer } from "./classes/Freezer.js";
@@ -42,7 +42,7 @@ let numberErrorSound;
 
 let imgGoku;
 let imgFreezer;
-let myPacman;
+let myGoku;
 let imgPowerUp;
 const timerSecond = 0;
 let timer = 0;
@@ -130,14 +130,14 @@ function setup() { // s'executa una vegada
         console.log(`He creat food a posicio fila ${filaActual}i columna ${columnaActual}`);
         arrFood.push(menjar);
       } else if (map[filaActual][columnaActual] === 3) {
-        myPacman = new Pacman(filaActual, columnaActual);
+        myGoku = new Goku(filaActual, columnaActual);
         console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
       } else if (map[filaActual][columnaActual] === 11) {
         const freezer = new Freezer(filaActual, columnaActual);
         console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
         arrFreezer.push(freezer);
       } else if (map[filaActual][columnaActual] === 6) {
-        myPacman = new Pacman(filaActual, columnaActual);
+        myGoku = new Goku(filaActual, columnaActual);
         const powerUp = new PowerUp(filaActual, columnaActual);
         arrPowerUp.push(powerUp);
       }
@@ -151,9 +151,9 @@ function setup() { // s'executa una vegada
  * @function testCollideRock comprova si el pacman colisiona amb una roca.
  * En el cas de que si, mostra un missatge per consola de que ha colissionat amb una roca.
  */
-if (myPacman) {
+if (myGoku) {
   for (let i = 0; i < arrRocks.length; i++) {
-    if (myPacman.coordXPixels === arrRocks[i].coordXPixels && myPacman.coordYPixels === arrRocks[i].coordYPixels) {
+    if (myGoku.coordXPixels === arrRocks[i].coordXPixels && myGoku.coordYPixels === arrRocks[i].coordYPixels) {
       console.log("Error, colisiona amb una roca");
     }
   }
@@ -165,15 +165,15 @@ if (myPacman) {
  * i elimina el food en la posicio que ha colisionat.
  */
 for (let i = 0; i < arrFood.length; i++) {
-  if (myPacman.coordXPixels === arrFood[i].coordXPixels && myPacman.coordYPixels === arrFood[i].coordYPixels) {
-    myPacman.testCollideRock(arrFood[i]);
+  if (myGoku.coordXPixels === arrFood[i].coordXPixels && myGoku.coordYPixels === arrFood[i].coordYPixels) {
+    myGoku.testCollideRock(arrFood[i]);
     soundFood.play();
   }
 }
 
 for (let i = 0; i < arrPowerUp.length; i++) {
-  if (myPacman.coordXPixels === arrPowerUp[i].coordXPixels && myPacman.coordYPixels === arrPowerUp[i].coordYPixels) {
-    myPacman.testCollideRock(arrPowerUp[i]);
+  if (myGoku.coordXPixels === arrPowerUp[i].coordXPixels && myGoku.coordYPixels === arrPowerUp[i].coordYPixels) {
+    myGoku.testCollideRock(arrPowerUp[i]);
     soundFood.play();
   }
 }
@@ -183,8 +183,8 @@ for (let i = 0; i < arrPowerUp.length; i++) {
  * al colissionar mostra un error i elimina la cirera de la posicio que ha colisionat.
  */
 for (let i = 0; i < arrFreezer.length; i++) {
-  if (myPacman.coordXPixels === arrFreezer[i].coordXPixels && myPacman.coordYPixels === arrFreezer[i].coordYPixels) {
-    myPacman.testCollideRock(arrFreezer[i]);
+  if (myGoku.coordXPixels === arrFreezer[i].coordXPixels && myGoku.coordYPixels === arrFreezer[i].coordYPixels) {
+    myGoku.testCollideRock(arrFreezer[i]);
     soundFood.play();
   }
 }
@@ -199,13 +199,13 @@ function draw() {
   arrRocks.forEach((roca) => roca.showObject(imgRock));
   arrFood.forEach((menjar) => menjar.showObject(imgEsferas));
   arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
-  myPacman.showObject(imgGoku);
+  myGoku.showObject(imgGoku);
   arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
   arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
   textSize(20);
   textAlign(LEFT, CENTER);
   timer = floor((millis() - startTimeGame) / 1000);
-  text(`Puntuació: ${myPacman.score}`, 10, HEIGHT_CANVAS + 30);
+  text(`Puntuació: ${myGoku.score}`, 10, HEIGHT_CANVAS + 30);
   text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
 
   testFinishGame();
@@ -217,16 +217,16 @@ function draw() {
  */
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    myPacman.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === LEFT_ARROW) {
-    myPacman.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === UP_ARROW) {
-    myPacman.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === DOWN_ARROW) {
-    myPacman.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
     soundPacman.play();
   } else {
     console.log("Error de tecla");
