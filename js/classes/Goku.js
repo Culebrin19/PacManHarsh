@@ -100,9 +100,8 @@ export class Goku extends GameObject {
     for (const roca of arrRocks) {
       if (newX === roca.coordXPixels && newY === roca.coordYPixels) {
         console.log("Has colisionat amb una roca");
-        alert("Has xocat amb una roca, has perdut una vida");
-
         this.pacmanLive--;
+        alert("Has xocat amb una roca, has perdut una vida, et queden " + this.pacmanLive + " vides")
 
         if (this.pacmanLive <= 0) {
           if (confirm("Has perdut totes les vides, vols tornar a jugar?")) {
