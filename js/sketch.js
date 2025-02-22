@@ -139,9 +139,9 @@ function setup() { // s'executa una vegada
         arrPowerUp.push(powerUp);
       }
     }
-    console.log(arrRocks.length);
+    // console.log(arrRocks.length);
   }
-  startTimeGame = millis();
+  // startTimeGame = millis();
 }
 
 /**
@@ -168,12 +168,12 @@ for (let i = 0; i < arrFood.length; i++) {
   }
 }
 
-for (let i = 0; i < arrPowerUp.length; i++) {
-  if (myGoku.coordXPixels === arrPowerUp[i].coordXPixels && myGoku.coordYPixels === arrPowerUp[i].coordYPixels) {
-    myGoku.testCollideRock(arrPowerUp[i]);
-    soundFood.play();
-  }
-}
+// for (let i = 0; i < arrPowerUp.length; i++) {
+//   if (myGoku.coordXPixels === arrPowerUp[i].coordXPixels && myGoku.coordYPixels === arrPowerUp[i].coordYPixels) {
+//     myGoku.testCollideRock(arrPowerUp[i]);
+//     soundFood.play();
+//   }
+// }
 
 /**
  * @function testCollideCherry comprova si el pacman colisiona amb una cirera. Igual que en la funció anterior,
@@ -197,15 +197,15 @@ function draw() {
   arrFood.forEach((menjar) => menjar.showObject(imgEsferas));
   arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
   myGoku.showObject(imgGoku);
-  arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
+  // arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
   arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
-  textSize(20);
-  textAlign(LEFT, CENTER);
-  timer = floor((millis() - startTimeGame) / 1000);
-  text(`Puntuació: ${myGoku.score}`, 10, HEIGHT_CANVAS + 30);
-  text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
+  // textSize(20);
+  // textAlign(LEFT, CENTER);
+  // timer = floor((millis() - startTimeGame) / 1000);
+  // text(`Puntuació: ${myGoku.score}`, 10, HEIGHT_CANVAS + 30);
+  // text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
 
-  testFinishGame();
+  // testFinishGame();
 }
 
 /**
@@ -235,46 +235,46 @@ function draw() {
 /**
  * @function showError mostra una imatge d'error en cas de que no es pugui carregar una imatge.
  */
-function showError() {
-  // console.error("Error carregar imatge");
-  const errorImage = new ErrorPacman(3, "Error carregar imatge");
-  errorImage.toString();
-  const parent = document.getElementById("error-holder");
-  const node = document.createElement("img");
-  node.setAttribute("src", "../img/error.png");
-  node.setAttribute("alt", "Imatge error");
-  parent.appendChild(node);
-  noLoop();
-  // remove();
-}
+// function showError() {
+//   // console.error("Error carregar imatge");
+//   const errorImage = new ErrorPacman(3, "Error carregar imatge");
+//   errorImage.toString();
+//   const parent = document.getElementById("error-holder");
+//   const node = document.createElement("img");
+//   node.setAttribute("src", "../img/error.png");
+//   node.setAttribute("alt", "Imatge error");
+//   parent.appendChild(node);
+//   noLoop();
+//   // remove();
+// }
 
 /**
  * @function testFinishGame comprova si el joc ha acabat.
  * Pot acabar quan no queda més food, quan arriba al temps indicat o quan es queda sense vides.
  */
-function testFinishGame() {
-  if (arrFood.length === 0 && arrCireres.length === 0) {
-    // alert("Fi del joc, has guanyat");
-    // noLoop();
-    // window.location.reload();
-    const theConfirm = confirm("has guanyat, vols tornar a començar?");
-    if (theConfirm) {
-      window.location.reload();
-    } else {
-      noLoop(); // veure que fer al else (alert o loop)
-    }
-  } else if (timer >= 90) {
-    // test lose game
-    confirm("Fi del joc, has perdut");
-    window.location.reload();
-  } else if (LIVES_PACMAN === 0) {
-    alert("Has perdut totes les vides, fi del joc");
-    window.location.reload();
-    // continuar jugant
-  }
-}
+// function testFinishGame() {
+//   if (arrFood.length === 0 && arrCireres.length === 0) {
+//     // alert("Fi del joc, has guanyat");
+//     // noLoop();
+//     // window.location.reload();
+//     const theConfirm = confirm("has guanyat, vols tornar a començar?");
+//     if (theConfirm) {
+//       window.location.reload();
+//     } else {
+//       noLoop(); // veure que fer al else (alert o loop)
+//     }
+//   } else if (timer >= 90) {
+//     // test lose game
+//     confirm("Fi del joc, has perdut");
+//     window.location.reload();
+//   } else if (LIVES_PACMAN === 0) {
+//     alert("Has perdut totes les vides, fi del joc");
+//     window.location.reload();
+//     // continuar jugant
+//   }
+// }
 
 globalThis.setup = setup;
 globalThis.draw = draw;
 globalThis.preload = preload;
-globalThis.keyPressed = keyPressed;
+// globalThis.keyPressed = keyPressed;
