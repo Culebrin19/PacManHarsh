@@ -66,9 +66,6 @@ function preload() { // tot lo pesat a preload
   imgCireres = loadImage("../img/cireres.png", handleImage, handleError);
   imgGoku = loadImage("../img/goku.png", handleImage, handleError);
   imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
-  // imgPacManLeft = loadImage("../img/packLeft.png", handleImage, handleError);
-  // imgPacManUp = loadImage("../img/packUp.png", handleImage, handleError);
-  // imgPacManDown = loadImage("../img/packDown.png", handleImage, handleError);
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
   imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
