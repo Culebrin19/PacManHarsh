@@ -212,25 +212,25 @@ function draw() {
  * @function keyPressed permet moure el pacman en les base a les tecles que es prem.
  * Si es prem alguna que no es, mostra un error per consola.
  */
-function keyPressed() {
-  if (keyCode === RIGHT_ARROW) {
-    myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
-  } else if (keyCode === LEFT_ARROW) {
-    myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
-  } else if (keyCode === UP_ARROW) {
-    myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
-  } else if (keyCode === DOWN_ARROW) {
-    myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
-  } else {
-    console.log("Error de tecla");
-    const error = new ErrorPacman(1, "Error de tecla");
-    error.toString();
-  }
-}
+// function keyPressed() {
+//   if (keyCode === RIGHT_ARROW) {
+//     myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
+//     soundPacman.play();
+//   } else if (keyCode === LEFT_ARROW) {
+//     myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
+//     soundPacman.play();
+//   } else if (keyCode === UP_ARROW) {
+//     myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
+//     soundPacman.play();
+//   } else if (keyCode === DOWN_ARROW) {
+//     myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
+//     soundPacman.play();
+//   } else {
+//     console.log("Error de tecla");
+//     const error = new ErrorPacman(1, "Error de tecla");
+//     error.toString();
+//   }
+// }
 
 /**
  * @function showError mostra una imatge d'error en cas de que no es pugui carregar una imatge.
