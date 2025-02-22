@@ -64,25 +64,25 @@ function preload() { // tot lo pesat a preload
   imgEsferas = loadImage("/img/esferas.png", handleImage, handleError);
   imgGoku = loadImage("/img/goku.png", handleImage, handleError);
   imgFreezer = loadImage("/img/freezer4.png", handleImage, handleError);
-  // soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
-  // soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
-  // imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
+  soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
+  soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
+  imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
 }
 
 /**
  * @function handleSound mostra un missatge per consola si s'ha carregat correctament el so
  */
-// function handleSound() {
-//   console.error("S'ha carregat correctament el so");
-// }
+function handleSound() {
+  console.error("S'ha carregat correctament el so");
+}
 
 /**
  * @function handleErrorSound mostra un missatge per consola si s'ha produit un error al carregar el so
  */
-// function handleErrorSound() {
-//   console.error("S'ha produit un errror al carregar el so");
-//   numberErrorSound++;
-// }
+function handleErrorSound() {
+  console.error("S'ha produit un errror al carregar el so");
+  numberErrorSound++;
+}
 
 /**
  * @function handleError mostra un missatge per consola si s'ha produit un error al carregar la imatge
@@ -94,7 +94,7 @@ function handleError() {
   } catch (error) {
     console.error(error.toString());
   }
-  // showError();
+  showError();
 }
 
 /**
@@ -137,9 +137,9 @@ function setup() { // s'executa una vegada
         arrPowerUp.push(powerUp);
       }
     }
-    // console.log(arrRocks.length);
+    console.log(arrRocks.length);
   }
-  // startTimeGame = millis();
+  startTimeGame = millis();
 }
 
 /**
@@ -166,12 +166,12 @@ for (let i = 0; i < arrFood.length; i++) {
   }
 }
 
-// for (let i = 0; i < arrPowerUp.length; i++) {
-//   if (myGoku.coordXPixels === arrPowerUp[i].coordXPixels && myGoku.coordYPixels === arrPowerUp[i].coordYPixels) {
-//     myGoku.testCollideRock(arrPowerUp[i]);
-//     soundFood.play();
-//   }
-// }
+for (let i = 0; i < arrPowerUp.length; i++) {
+  if (myGoku.coordXPixels === arrPowerUp[i].coordXPixels && myGoku.coordYPixels === arrPowerUp[i].coordYPixels) {
+    myGoku.testCollideRock(arrPowerUp[i]);
+    soundFood.play();
+  }
+}
 
 /**
  * @function testCollideCherry comprova si el pacman colisiona amb una cirera. Igual que en la funció anterior,
@@ -197,82 +197,82 @@ function draw() {
   myGoku.showObject(imgGoku);
   arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
   arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
-  // textSize(20);
-  // textAlign(LEFT, CENTER);
-  // timer = floor((millis() - startTimeGame) / 1000);
-  // text(`Puntuació: ${myGoku.score}`, 10, HEIGHT_CANVAS + 30);
-  // text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
+  textSize(20);
+  textAlign(LEFT, CENTER);
+  timer = floor((millis() - startTimeGame) / 1000);
+  text(`Puntuació: ${myGoku.score}`, 10, HEIGHT_CANVAS + 30);
+  text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
 
-  // testFinishGame();
+  testFinishGame();
 }
 
 /**
  * @function keyPressed permet moure el pacman en les base a les tecles que es prem.
  * Si es prem alguna que no es, mostra un error per consola.
  */
-// function keyPressed() {
-//   if (keyCode === RIGHT_ARROW) {
-//     myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
-//     soundPacman.play();
-//   } else if (keyCode === LEFT_ARROW) {
-//     myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
-//     soundPacman.play();
-//   } else if (keyCode === UP_ARROW) {
-//     myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
-//     soundPacman.play();
-//   } else if (keyCode === DOWN_ARROW) {
-//     myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
-//     soundPacman.play();
-//   } else {
-//     console.log("Error de tecla");
-//     const error = new ErrorPacman(1, "Error de tecla");
-//     error.toString();
-//   }
-// }
+function keyPressed() {
+  if (keyCode === RIGHT_ARROW) {
+    myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    soundPacman.play();
+  } else if (keyCode === LEFT_ARROW) {
+    myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    soundPacman.play();
+  } else if (keyCode === UP_ARROW) {
+    myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    soundPacman.play();
+  } else if (keyCode === DOWN_ARROW) {
+    myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
+    soundPacman.play();
+  } else {
+    console.log("Error de tecla");
+    const error = new ErrorPacman(1, "Error de tecla");
+    error.toString();
+  }
+}
 
 /**
  * @function showError mostra una imatge d'error en cas de que no es pugui carregar una imatge.
  */
-// function showError() {
-//   // console.error("Error carregar imatge");
-//   const errorImage = new ErrorPacman(3, "Error carregar imatge");
-//   errorImage.toString();
-//   const parent = document.getElementById("error-holder");
-//   const node = document.createElement("img");
-//   node.setAttribute("src", "../img/error.png");
-//   node.setAttribute("alt", "Imatge error");
-//   parent.appendChild(node);
-//   noLoop();
-//   // remove();
-// }
+function showError() {
+  // console.error("Error carregar imatge");
+  const errorImage = new ErrorPacman(3, "Error carregar imatge");
+  errorImage.toString();
+  const parent = document.getElementById("error-holder");
+  const node = document.createElement("img");
+  node.setAttribute("src", "../img/error.png");
+  node.setAttribute("alt", "Imatge error");
+  parent.appendChild(node);
+  noLoop();
+  // remove();
+}
 
 /**
  * @function testFinishGame comprova si el joc ha acabat.
  * Pot acabar quan no queda més food, quan arriba al temps indicat o quan es queda sense vides.
  */
-// function testFinishGame() {
-//   if (arrFood.length === 0 && arrCireres.length === 0) {
-//     // alert("Fi del joc, has guanyat");
-//     // noLoop();
-//     // window.location.reload();
-//     const theConfirm = confirm("has guanyat, vols tornar a començar?");
-//     if (theConfirm) {
-//       window.location.reload();
-//     } else {
-//       noLoop(); // veure que fer al else (alert o loop)
-//     }
-//   } else if (timer >= 90) {
-//     // test lose game
-//     confirm("Fi del joc, has perdut");
-//     window.location.reload();
-//   } else if (LIVES_PACMAN === 0) {
-//     alert("Has perdut totes les vides, fi del joc");
-//     window.location.reload();
-//     // continuar jugant
-//   }
-// }
+function testFinishGame() {
+  if (arrFood.length === 0 && arrCireres.length === 0) {
+    // alert("Fi del joc, has guanyat");
+    // noLoop();
+    // window.location.reload();
+    const theConfirm = confirm("has guanyat, vols tornar a començar?");
+    if (theConfirm) {
+      window.location.reload();
+    } else {
+      noLoop(); // veure que fer al else (alert o loop)
+    }
+  } else if (timer >= 90) {
+    // test lose game
+    confirm("Fi del joc, has perdut");
+    window.location.reload();
+  } else if (LIVES_PACMAN === 0) {
+    alert("Has perdut totes les vides, fi del joc");
+    window.location.reload();
+    // continuar jugant
+  }
+}
 
 globalThis.setup = setup;
 globalThis.draw = draw;
 globalThis.preload = preload;
-// globalThis.keyPressed = keyPressed;
+globalThis.keyPressed = keyPressed;
