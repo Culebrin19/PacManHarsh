@@ -1,7 +1,7 @@
 // import { GameObject } from "./GameObject.js";
 import { GameObject } from "./GameObject.js";
 import { IMAGE_SIZE, WIDTH_CANVAS, HEIGHT_CANVAS, LIVES_PACMAN } from "../sketch.js";
-import { Cherry } from "./Freezer.js";
+import { Freezer } from "./Freezer.js";
 import { Food } from "./Food.js";
 
 export class Pacman extends GameObject {

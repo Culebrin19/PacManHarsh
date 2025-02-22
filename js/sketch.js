@@ -2,7 +2,7 @@ import { GameObject } from "./classes/GameObject.js";
 import { Pacman } from "./classes/Pacman.js";
 import { Food } from "./classes/Food.js";
 import { ErrorPacman } from "./classes/ErrorPacman.js";
-import { Cherry } from "./classes/Freezer.js";
+import { Freezer } from "./classes/Freezer.js";
 import { PowerUp } from "./classes/PowerUp.js";
 
 /**
@@ -133,7 +133,7 @@ function setup() { // s'executa una vegada
         myPacman = new Pacman(filaActual, columnaActual);
         console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
       } else if (map[filaActual][columnaActual] === 11) {
-        const freezer = new Cherry(filaActual, columnaActual);
+        const freezer = new Freezer(filaActual, columnaActual);
         console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
         arrFreezer.push(freezer);
       } else if (map[filaActual][columnaActual] === 6) {
