@@ -160,6 +160,7 @@ if (myGoku) {
     if (myGoku.coordXPixels === arrRocks[i].coordXPixels && myGoku.coordYPixels === arrRocks[i].coordYPixels) {
       console.log("Error, colisiona amb una roca");
       LIVES_PACMAN--;
+      console.log(`Vides restants: ${LIVES_PACMAN}`);
     }
   }
 }
@@ -277,7 +278,7 @@ function testFinishGame() {
     // test lose game
     confirm("Fi del joc, has perdut");
     window.location.reload();
-  } else if (LIVES_PACMAN === 0) {
+  } else if (LIVES_PACMAN <= 0) {
     alert("Has perdut totes les vides, fi del joc");
     window.location.reload();
     // continuar jugant
