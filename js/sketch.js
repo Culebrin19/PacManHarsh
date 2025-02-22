@@ -87,23 +87,23 @@ function preload() { // tot lo pesat a preload
 /**
  * @function handleError mostra un missatge per consola si s'ha produit un error al carregar la imatge
  */
-// function handleError() {
-//   console.error("Error al carregar imatge");
-//   try {
-//     throw new ErrorPacman(2, "Error carregar imatge");
-//   } catch (error) {
-//     console.error(error.toString());
-//   }
-//   // showError();
-// }
+function handleError() {
+  console.error("Error al carregar imatge");
+  try {
+    throw new ErrorPacman(2, "Error carregar imatge");
+  } catch (error) {
+    console.error(error.toString());
+  }
+  // showError();
+}
 
 /**
  * @function handleImage mostra un missatge per consola si s'ha carregat correctament la imatge
  */
-// function handleImage() {
-//   console.error("Images carregada correctament");
-//   numberImagesLoaded++;
-// }
+function handleImage() {
+  console.error("Images carregada correctament");
+  numberImagesLoaded++;
+}
 
 /**
  * @function setup inicialitza el joc una sola vegada.
@@ -146,13 +146,13 @@ function setup() { // s'executa una vegada
  * @function testCollideRock comprova si el pacman colisiona amb una roca.
  * En el cas de que si, mostra un missatge per consola de que ha colissionat amb una roca.
  */
-// if (myGoku) {
-//   for (let i = 0; i < arrRocks.length; i++) {
-//     if (myGoku.coordXPixels === arrRocks[i].coordXPixels && myGoku.coordYPixels === arrRocks[i].coordYPixels) {
-//       console.log("Error, colisiona amb una roca");
-//     }
-//   }
-// }
+if (myGoku) {
+  for (let i = 0; i < arrRocks.length; i++) {
+    if (myGoku.coordXPixels === arrRocks[i].coordXPixels && myGoku.coordYPixels === arrRocks[i].coordYPixels) {
+      console.log("Error, colisiona amb una roca");
+    }
+  }
+}
 
 /**
  * @function testCollideFood comprova si el pacman colisiona amb un menjar.
