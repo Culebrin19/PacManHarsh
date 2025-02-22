@@ -3,6 +3,7 @@ import { Pacman } from "./classes/Pacman.js";
 import { Food } from "./classes/Food.js";
 import { ErrorPacman } from "./classes/ErrorPacman.js";
 import { Cherry } from "./classes/Cherry.js";
+import { PowerUp } from "./classes/PowerUp.js";
 
 /**
  * @constant map es el mapa del joc, cada número representa un objtecte diferent
@@ -12,7 +13,7 @@ const map = [
   [1, 3, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 2, 0, 0, 0, 2, 0, 4, 2, 0, 1],
   [1, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 6, 0, 0, 1],
   [1, 0, 0, 2, 0, 0, 1, 0, 0, 2, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 1],
@@ -44,6 +45,7 @@ let imgPacManLeft;
 let imgPacManUp;
 let imgPacManDown;
 let myPacman;
+let imgPowerUp;
 const timerSecond = 0;
 let timer = 0;
 let startTimeGame = 0;
@@ -52,6 +54,7 @@ const endTimeGame = 0;
 const arrRocks = [];
 const arrFood = [];
 const arrCireres = [];
+const arrPowerUp = [];
 let numberImagesLoaded = 0;
 console.log("Boff");
 
@@ -68,6 +71,7 @@ function preload() { // tot lo pesat a preload
   imgPacManDown = loadImage("../img/packDown.png", handleImage, handleError);
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
+  imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
 }
 
 /**
@@ -132,6 +136,10 @@ function setup() { // s'executa una vegada
         const cireres = new Cherry(filaActual, columnaActual);
         console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
         arrCireres.push(cireres);
+      } else if (map[filaActual][columnaActual] === 6) {
+        myPacman = new Pacman(filaActual, columnaActual);
+        const powerUp = new PowerUp(filaActual, columnaActual);
+        arrPowerUp.push(powerUp);
       }
     }
     console.log(arrRocks.length);
@@ -163,6 +171,13 @@ for (let i = 0; i < arrFood.length; i++) {
   }
 }
 
+for (let i = 0; i < arrPowerUp.length; i++) {
+  if (myPacman.coordXPixels === arrPowerUp[i].coordXPixels && myPacman.coordYPixels === arrPowerUp[i].coordYPixels) {
+    myPacman.testCollideRock(arrPowerUp[i]);
+    soundFood.play();
+  }
+}
+
 /**
  * @function testCollideCherry comprova si el pacman colisiona amb una cirera. Igual que en la funció anterior,
  * al colissionar mostra un error i elimina la cirera de la posicio que ha colisionat.
@@ -185,6 +200,7 @@ function draw() {
   arrFood.forEach((menjar) => menjar.showObject(imgFood));
   arrCireres.forEach((cireres) => cireres.showObject(imgCireres));
   myPacman.showObject(imgPacManRigth);
+  arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
   textSize(20);
   textAlign(LEFT, CENTER);
   timer = floor((millis() - startTimeGame) / 1000);
@@ -212,16 +228,16 @@ function draw() {
  */
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    myPacman.moveRight(arrFood, arrRocks, arrCireres);
+    myPacman.moveRight(arrFood, arrRocks, arrCireres, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === LEFT_ARROW) {
-    myPacman.moveLeft(arrFood, arrRocks, arrCireres);
+    myPacman.moveLeft(arrFood, arrRocks, arrCireres, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === UP_ARROW) {
-    myPacman.moveUp(arrFood, arrRocks, arrCireres);
+    myPacman.moveUp(arrFood, arrRocks, arrCireres, arrPowerUp);
     soundPacman.play();
   } else if (keyCode === DOWN_ARROW) {
-    myPacman.moveDown(arrFood, arrRocks, arrCireres);
+    myPacman.moveDown(arrFood, arrRocks, arrCireres, arrPowerUp);
     soundPacman.play();
   } else {
     console.log("Error de tecla");

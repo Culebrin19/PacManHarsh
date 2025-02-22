@@ -147,5 +147,17 @@ export class Pacman extends GameObject {
         break;
       }
     }
+
+    // for (let i = 0; i < arrPowerUp.length; i++) {
+    //   if (this.coordXPixels === arrPowerUp[i].coordXPixels && this.coordYPixels === arrPowerUp[i].coordYPixels) {
+    //     console.log("Has menjat una cirera");
+    //     this.score += arrPowerUp[i].pointsCherry;
+    //     arrPowerUp.splice(i, 1);
+    //     console.log(`Puntuació actual: ${this.score}`);
+    //     break;
+    //   }
+    // }
+
+    // ficar la posicio de quin powerup es amb la que xoca
   }
 }
