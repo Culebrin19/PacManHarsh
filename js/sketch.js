@@ -21,7 +21,7 @@ const map = [
   [1, 11, 0, 0, 2, 1, 0, 1, 1, 0, 11, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 2, 0, 2, 0, 0, 0, 0, 11, 0, 2, 4, 1],
+  [1, 15, 2, 0, 2, 0, 0, 0, 0, 11, 0, 2, 4, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
@@ -43,16 +43,20 @@ let imgGoku;
 let imgFreezer;
 let myGoku;
 let imgPowerUp;
+let imgTemplo;
 const timerSecond = 0;
 let timer = 0;
 let startTimeGame = 0;
 const endTimeGame = 0;
+let numeroEsferes = 0;
+let numeroEsferesRecollides = 0;
 
 const arrRocks = [];
 const arrFood = [];
 const arrCireres = [];
 const arrPowerUp = [];
 const arrFreezer = [];
+const arrTemplo = [];
 let numberImagesLoaded = 0;
 console.log("Boff");
 
@@ -67,6 +71,7 @@ function preload() { // tot lo pesat a preload
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
   imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
+  imgTemplo = loadImage("../img/templo.png", handleImage, handleError);
 }
 
 /**
@@ -135,11 +140,15 @@ function setup() { // s'executa una vegada
         myGoku = new Goku(filaActual, columnaActual);
         const powerUp = new PowerUp(filaActual, columnaActual);
         arrPowerUp.push(powerUp);
-      }
+      } else if (map[filaActual][columnaActual] === 15) {
+        const templo = new GameObject(filaActual, columnaActual);
+        console.log(`He creat templo a posicio fila ${filaActual}i columna ${columnaActual}`);
+        arrTemplo.push(templo);
     }
     console.log(arrRocks.length);
   }
   startTimeGame = millis();
+}
 }
 
 /**
@@ -163,6 +172,7 @@ for (let i = 0; i < arrFood.length; i++) {
   if (myGoku.coordXPixels === arrFood[i].coordXPixels && myGoku.coordYPixels === arrFood[i].coordYPixels) {
     myGoku.testCollideRock(arrFood[i]);
     soundFood.play();
+    numeroEsferesRecollides++;
   }
 }
 
@@ -197,6 +207,7 @@ function draw() {
   myGoku.showObject(imgGoku);
   arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
   arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
+  arrTemplo.forEach((templo) => templo.showObject(imgTemplo));
   textSize(20);
   textAlign(LEFT, CENTER);
   timer = floor((millis() - startTimeGame) / 1000);
