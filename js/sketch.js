@@ -2,7 +2,7 @@ import { GameObject } from "./classes/GameObject.js";
 import { Pacman } from "./classes/Pacman.js";
 import { Food } from "./classes/Food.js";
 import { ErrorPacman } from "./classes/ErrorPacman.js";
-import { Cherry } from "./classes/Cherry.js";
+import { Cherry } from "./classes/Freezer.js";
 import { PowerUp } from "./classes/PowerUp.js";
 
 /**
