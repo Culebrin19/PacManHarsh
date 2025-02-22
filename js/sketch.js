@@ -60,10 +60,10 @@ console.log("Boff");
  * @function preload carrega totes les imatges i els sons del joc
  */
 function preload() { // tot lo pesat a preload
-  imgRock = loadImage("/img/roca.png", handleImage, handleError);
-  imgEsferas = loadImage("/img/esferas.png", handleImage, handleError);
-  imgGoku = loadImage("/img/goku.png", handleImage, handleError);
-  imgFreezer = loadImage("/img/freezer4.png", handleImage, handleError);
+  imgRock = loadImage("../img/roca.png", handleImage, handleError);
+  imgEsferas = loadImage("../img/esferas.png", handleImage, handleError);
+  imgGoku = loadImage("../img/goku.png", handleImage, handleError);
+  imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
   imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
