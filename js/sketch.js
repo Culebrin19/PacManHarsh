@@ -31,7 +31,7 @@ export const IMAGE_SIZE = 32;
 export const WIDTH_CANVAS = 448;
 export const HEIGHT_CANVAS = 448; // IMAGE_SIZE * ROWS
 const extraSize = 80;
-export let LIVES_PACMAN;
+export let LIVES_PACMAN = 3;
 
 let imgRock;
 let imgEsferas;
@@ -159,6 +159,7 @@ if (myGoku) {
   for (let i = 0; i < arrRocks.length; i++) {
     if (myGoku.coordXPixels === arrRocks[i].coordXPixels && myGoku.coordYPixels === arrRocks[i].coordYPixels) {
       console.log("Error, colisiona amb una roca");
+      LIVES_PACMAN--;
     }
   }
 }

@@ -103,7 +103,6 @@ export class Goku extends GameObject {
         alert("Has xocat amb una roca, has perdut una vida");
         this.coordYPixels = 160;
         this.coordXPixels = 256;
-        this.pacmanLive--;
         return true;
       }
     }
