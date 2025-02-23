@@ -44,6 +44,7 @@ let imgFreezer;
 let myGoku;
 let imgPowerUp;
 let imgTemplo;
+
 const timerSecond = 0;
 let timer = 0;
 let startTimeGame = 0;

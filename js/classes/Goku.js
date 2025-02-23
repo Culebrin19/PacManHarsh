@@ -26,14 +26,14 @@ export class Goku extends GameObject {
    * @param arrRocks
    * @param arrFreezer
    */
-  moveRight(arrFood, arrRocks, arrFreezer) {
+  moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordXPixels + this.speedPacman;
     if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
       console.log("Error, no es pot moure a la dreta");
     } else {
       this.direction = 1;
       this.coordXPixels = temp;
-      this.eatFood(arrFood, arrFreezer);
+      this.eatFood(arrFood, arrFreezer, arrPowerUp);
     }
   }
 
@@ -44,14 +44,14 @@ export class Goku extends GameObject {
    * @param arrRocks
    * @param arrFreezer
    */
-  moveLeft(arrFood, arrRocks, arrFreezer) {
+  moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordXPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
       console.log("Error, no es pot moure a l'esquerra");
     } else {
       this.direction = 3;
       this.coordXPixels = temp;
-      this.eatFood(arrFood, arrFreezer);
+      this.eatFood(arrFood, arrFreezer, arrPowerUp);
     }
   }
 
@@ -62,14 +62,14 @@ export class Goku extends GameObject {
    * @param arrRocks
    * @param arrFreezer
    */
-  moveUp(arrFood, arrRocks, arrFreezer) {
+  moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordYPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
       console.log("Error, no es pot moure a dalt");
     } else {
       this.direction = 2;
       this.coordYPixels = temp;
-      this.eatFood(arrFood, arrFreezer);
+      this.eatFood(arrFood, arrFreezer, arrPowerUp);
     }
   }
 
@@ -80,14 +80,14 @@ export class Goku extends GameObject {
    * @param arrRocks
    * @param arrFreezer
    */
-  moveDown(arrFood, arrRocks, arrFreezer) {
+  moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordYPixels + this.speedPacman;
     if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
       console.log("Error, no es pot moure a baix");
     } else {
       this.direction = 4;
       this.coordYPixels = temp;
-      this.eatFood(arrFood, arrFreezer);
+      this.eatFood(arrFood, arrFreezer, arrPowerUp);
     }
   }
 
@@ -138,25 +138,49 @@ export class Goku extends GameObject {
    * @param arrFood
    * @param arrFreezer
    */
-  eatFood(arrFood, arrFreezer) {
+  eatFood(arrFood, arrFreezer, arrPowerUp) {
+    /**
+     * @var puntsExtra mutiplicara per 2 en el cas de que estigui true, i per 1  en el cas de que estigui false
+     */
+    let puntsExtra = this.doblePunts ? 2 : 1; 
+
     for (let i = 0; i < arrFood.length; i++) {
-      if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {
-        console.log("Has menjat food");
-        this.score += arrFood[i].pointsFood;
-        arrFood.splice(i, 1);
-        console.log(`Puntuació actual: ${this.score}`);
-        break;
-      }
+        if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {
+            console.log("Has menjat food");
+            this.score += arrFood[i].pointsFood * puntsExtra;
+            arrFood.splice(i, 1);
+            console.log(`Puntuacio actual: ${this.score}`);
+            break;
+        }
     }
 
     for (let i = 0; i < arrFreezer.length; i++) {
-      if (this.coordXPixels === arrFreezer[i].coordXPixels && this.coordYPixels === arrFreezer[i].coordYPixels) {
-        console.log("Has menjat una cirera");
-        this.score += arrFreezer[i].pointsCherry;
-        arrFreezer.splice(i, 1);
-        console.log(`Puntuació actual: ${this.score}`);
-        break;
-      }
+        if (this.coordXPixels === arrFreezer[i].coordXPixels && this.coordYPixels === arrFreezer[i].coordYPixels) {
+            console.log("Has menjat Freezer");
+            this.score += arrFreezer[i].pointsCherry * puntsExtra;
+            arrFreezer.splice(i, 1);
+            console.log(`Puntuacio actual: ${this.score}`);
+            break;
+        }
     }
-  }
+
+    for (let i = 0; i < arrPowerUp.length; i++) {
+        if (this.coordXPixels === arrPowerUp[i].coordXPixels && this.coordYPixels === arrPowerUp[i].coordYPixels) {
+            console.log("Has recollit un Power-Up");
+            arrPowerUp.splice(i, 1); 
+
+            this.doblePunts = true;
+            console.log("Doble de punts activat");
+            document.getElementById("powerUpMessage").style.display = "block";
+
+            setTimeout(() => {
+                this.doblePunts = false;
+                console.log("Doble de punts desactivat");
+                document.getElementById("powerUpMessage").style.display = "none";
+            }, 10000);
+
+            break;
+        }
+    }
+}
 }
