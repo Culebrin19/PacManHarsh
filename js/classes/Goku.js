@@ -4,13 +4,18 @@ import { Freezer } from "./Freezer.js";
 import { Food } from "./Food.js";
 import { PowerUp } from "./PowerUp.js";
 
+/**
+ * @class Goku
+ * @extends GameObject
+ */
+
 export class Goku extends GameObject {
   constructor(y, x) {
     super(y, x);
     this.direction = 1;
     this.speedPacman = 32;
     this.score = 0;
-    this.pacmanLive = LIVES_PACMAN; // acabar de veure com fer que restin
+    this.pacmanLive = LIVES_PACMAN;
     this.widthCanvasPacman = 128;
     this.pacmanDiametre = 32;
 
