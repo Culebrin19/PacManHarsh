@@ -2,6 +2,7 @@ import { GameObject } from "./GameObject.js";
 import { IMAGE_SIZE, WIDTH_CANVAS, HEIGHT_CANVAS, LIVES_PACMAN } from "../sketch.js";
 import { Freezer } from "./Freezer.js";
 import { Food } from "./Food.js";
+import { PowerUp } from "./PowerUp.js";
 
 export class Goku extends GameObject {
   constructor(y, x) {
@@ -12,6 +13,10 @@ export class Goku extends GameObject {
     this.pacmanLive = LIVES_PACMAN; // acabar de veure com fer que restin
     this.widthCanvasPacman = 128;
     this.pacmanDiametre = 32;
+
+    this.powerUpActive = false;
+    this.powerUpTimer = 0;
+    this.powerUpDuration = 10000;
   }
 
   /**
@@ -94,7 +99,7 @@ export class Goku extends GameObject {
    * @param arrRocks
    * @param newX
    * @param newY
-   * @returns {boolean}
+   * @returns {boolean}r
    */
   testCollideRock(arrRocks, newX, newY) {
     for (const roca of arrRocks) {
@@ -153,17 +158,5 @@ export class Goku extends GameObject {
         break;
       }
     }
-
-    // for (let i = 0; i < arrPowerUp.length; i++) {
-    //   if (this.coordXPixels === arrPowerUp[i].coordXPixels && this.coordYPixels === arrPowerUp[i].coordYPixels) {
-    //     console.log("Has menjat una cirera");
-    //     this.score += arrPowerUp[i].pointsCherry;
-    //     arrPowerUp.splice(i, 1);
-    //     console.log(`Puntuació actual: ${this.score}`);
-    //     break;
-    //   }
-    // }
-
-    // ficar la posicio de quin powerup es amb la que xoca
   }
 }

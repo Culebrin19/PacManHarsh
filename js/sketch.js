@@ -51,6 +51,10 @@ const endTimeGame = 0;
 const numeroEsferes = 0;
 let numeroEsferesRecollides = 0;
 
+let powerUpActive = false;
+let powerUpTimer = 0;
+const powerUpDuration = 10000;
+
 const arrRocks = [];
 const arrFood = [];
 const arrCireres = [];
@@ -266,7 +270,8 @@ function showError() {
  */
 function testFinishGame() {
 
-  let recollit = arrFood.length === 0;
+  let foodRecollit = arrFood.length === 0;
+  let frezzersRecollit = arrFreezer.length === 0;
 
   /**
    * @constant temple comprova si el pacman ha arribat al templo
@@ -280,7 +285,7 @@ function testFinishGame() {
    * @constant arrFood.length que està dins de la variable recollit, comprova si no queda menjar
    * i després si està en la posicio del temple, en el cas de que si, acaba el jox.
    */
-  if (recollit && temple) {
+  if (foodRecollit && frezzersRecollit && temple) {
     noLoop();
     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
     if (theConfirm) {
