@@ -36,7 +36,7 @@ export const LIVES_PACMAN = 3;
 let imgRock;
 let imgEsferas;
 let soundFood;
-let soundPacman;
+let soundGoku;
 let numberErrorSound;
 
 let imgGoku;
@@ -75,7 +75,7 @@ function preload() { // tot lo pesat a preload
   imgGoku = loadImage("../img/goku.png", handleImage, handleError);
   imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
-  soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
+  soundGoku = loadSound("../img/sounds/goku.mp3", handleSound, handleErrorSound);
   imgPowerUp = loadImage("../img/rayo.png", handleImage, handleError);
   imgTemplo = loadImage("../img/templo.png", handleImage, handleError);
 }
@@ -232,16 +232,16 @@ function draw() {
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
     myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
+    soundGoku.play();
   } else if (keyCode === LEFT_ARROW) {
     myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
+    soundGoku.play();
   } else if (keyCode === UP_ARROW) {
     myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
+    soundGoku.play();
   } else if (keyCode === DOWN_ARROW) {
     myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundPacman.play();
+    soundGoku.play();
   } else {
     console.log("Error de tecla");
     const error = new ErrorPacman(1, "Error de tecla");
