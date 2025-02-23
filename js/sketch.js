@@ -282,13 +282,17 @@ function testFinishGame() {
     myGoku.coordXPixels === templo.coordXPixels && myGoku.coordYPixels === templo.coordYPixels
   );
 
-  if (foodRecollit && frezzersRecollit && temple) {
+  /**
+   * @constant theConfirm si es compleixen les condicions, mostra un missatge de confirmació per pantalla
+   * i en el cas de que es premi el botó de confirmar, recarrega la pàgina.
+   */
+  if (foodRecollit && frezzersRecollit && temple) {   // condicio de si s'ha agaft tot el food, les esferes de drac i estàs al temple
     noLoop();
     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
     if (theConfirm) {
       window.location.reload();
     } else {
-      alert("Fi del joc! Gràcies per jugar.");
+      alert("Gracies per jugar");
     }
   } else if (timer >= 90) {
     confirm("Fi del joc, has perdut");
