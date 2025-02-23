@@ -31,7 +31,7 @@ export const IMAGE_SIZE = 32;
 export const WIDTH_CANVAS = 448;
 export const HEIGHT_CANVAS = 448; // IMAGE_SIZE * ROWS
 const extraSize = 80;
-export let LIVES_PACMAN = 3;
+export const LIVES_PACMAN = 3;
 
 let imgRock;
 let imgEsferas;
@@ -48,7 +48,7 @@ const timerSecond = 0;
 let timer = 0;
 let startTimeGame = 0;
 const endTimeGame = 0;
-let numeroEsferes = 0;
+const numeroEsferes = 0;
 let numeroEsferesRecollides = 0;
 
 const arrRocks = [];
@@ -64,7 +64,8 @@ console.log("Boff");
  * @function preload carrega totes les imatges i els sons del joc
  */
 function preload() { // tot lo pesat a preload
-  imgRock = loadImage("../img/roca.png", handleImage, handleError);
+  // eslint-disable-next-line sonarjs/no-use-of-empty-return-value
+  imgRock = loadImage("../img/roca.png", handleImage("roca"), handleError);
   imgEsferas = loadImage("../img/esferas.png", handleImage, handleError);
   imgGoku = loadImage("../img/goku.png", handleImage, handleError);
   imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
@@ -90,10 +91,11 @@ function handleErrorSound() {
 }
 
 /**
+ * @param msg
  * @function handleError mostra un missatge per consola si s'ha produit un error al carregar la imatge
  */
-function handleError() {
-  console.error("Error al carregar imatge");
+function handleError(msg) {
+  console.error(`Error al carregar imatge ${msg}`);
   try {
     throw new ErrorPacman(2, "Error carregar imatge");
   } catch (error) {
@@ -103,10 +105,11 @@ function handleError() {
 }
 
 /**
+ * @param msg
  * @function handleImage mostra un missatge per consola si s'ha carregat correctament la imatge
  */
-function handleImage() {
-  console.error("Images carregada correctament");
+function handleImage(msg) {
+  console.error(`Images carregada correctament ${msg}`);
   numberImagesLoaded++;
 }
 
