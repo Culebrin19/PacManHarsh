@@ -268,24 +268,20 @@ function showError() {
 /**
  * @function testFinishGame comprova si el joc ha acabat.
  * Pot acabar quan no queda més food, quan arriba al temps indicat o quan es queda sense vides.
+ * @constant temple comprova si el pacman ha arribat al templo
+ * rep cada element de l'array arrTemplo, le fico un alias de templo i compro si està en la mateixa posocio que el temple
+ * @constant arrFood.length que està dins de la variable recollit, comprova si no queda menjar
+ * i després si està en la posicio del temple, en el cas de que si, acaba el jox.
  */
 function testFinishGame() {
 
   let foodRecollit = arrFood.length === 0;
   let frezzersRecollit = arrFreezer.length === 0;
 
-  /**
-   * @constant temple comprova si el pacman ha arribat al templo
-   * rep cada element de l'array arrTemplo, le fico un alias de templo i compro si està en la mateixa posocio que el temple
-   */
   let temple = arrTemplo.some(templo =>
     myGoku.coordXPixels === templo.coordXPixels && myGoku.coordYPixels === templo.coordYPixels
   );
 
-  /**
-   * @constant arrFood.length que està dins de la variable recollit, comprova si no queda menjar
-   * i després si està en la posicio del temple, en el cas de que si, acaba el jox.
-   */
   if (foodRecollit && frezzersRecollit && temple) {
     noLoop();
     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
@@ -295,7 +291,6 @@ function testFinishGame() {
       alert("Fi del joc! Gràcies per jugar.");
     }
   } else if (timer >= 90) {
-    // test lose game
     confirm("Fi del joc, has perdut");
     window.location.reload();
   }
