@@ -144,11 +144,11 @@ function setup() { // s'executa una vegada
         const templo = new GameObject(filaActual, columnaActual);
         console.log(`He creat templo a posicio fila ${filaActual}i columna ${columnaActual}`);
         arrTemplo.push(templo);
+      }
+      console.log(arrRocks.length);
     }
-    console.log(arrRocks.length);
+    startTimeGame = millis();
   }
-  startTimeGame = millis();
-}
 }
 
 /**
@@ -262,15 +262,28 @@ function showError() {
  * Pot acabar quan no queda més food, quan arriba al temps indicat o quan es queda sense vides.
  */
 function testFinishGame() {
-  if (arrFood.length === 0 && arrCireres.length === 0) {
-    // alert("Fi del joc, has guanyat");
-    // noLoop();
-    // window.location.reload();
-    const theConfirm = confirm("has guanyat, vols tornar a començar?");
+
+  let recollit = arrFood.length === 0;
+
+  /**
+   * @constant temple comprova si el pacman ha arribat al templo
+   * rep cada element de l'array arrTemplo, le fico un alias de templo i compro si està en la mateixa posocio que el temple
+   */
+  let temple = arrTemplo.some(templo =>
+    myGoku.coordXPixels === templo.coordXPixels && myGoku.coordYPixels === templo.coordYPixels
+  );
+
+  /**
+   * @constant arrFood.length que està dins de la variable recollit, comprova si no queda menjar
+   * i després si està en la posicio del temple, en el cas de que si, acaba el jox.
+   */
+  if (recollit && temple) {
+    noLoop();
+    const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
     if (theConfirm) {
       window.location.reload();
     } else {
-      noLoop(); // veure que fer al else (alert o loop)
+      alert("Fi del joc! Gràcies per jugar.");
     }
   } else if (timer >= 90) {
     // test lose game
