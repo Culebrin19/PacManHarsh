@@ -76,7 +76,7 @@ function preload() { // tot lo pesat a preload
   imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   soundPacman = loadSound("../img/sounds/pacman.mp3", handleSound, handleErrorSound);
-  imgPowerUp = loadImage("../img/packRight.png", handleImage, handleError);
+  imgPowerUp = loadImage("../img/rayo.png", handleImage, handleError);
   imgTemplo = loadImage("../img/templo.png", handleImage, handleError);
 }
 
