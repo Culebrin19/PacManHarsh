@@ -4,34 +4,43 @@ import { Food } from "./classes/Food.js";
 import { ErrorPacman } from "./classes/ErrorPacman.js";
 import { Freezer } from "./classes/Freezer.js";
 import { PowerUp } from "./classes/PowerUp.js";
+import { ConfigGameClass } from "./classes/ConfigGameClass.js";
 
 /**
- * @constant map es el mapa del joc, cada número representa un objtecte diferent
+ * @constant mapActual es el mapActuala del joc, cada número representa un objtecte diferent
  */
-const map = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 11, 2, 0, 1],
-  [1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 11, 0, 0, 6, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 14, 1],
-  [1, 11, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 11, 0, 0, 2, 1, 0, 1, 1, 0, 11, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 15, 2, 0, 2, 0, 0, 0, 0, 11, 0, 2, 4, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-];
 
-const ROWS = 14;
-const COLUMNS = 14;
-export const IMAGE_SIZE = 32;
-export const WIDTH_CANVAS = 448;
-export const HEIGHT_CANVAS = 448; // IMAGE_SIZE * ROWS
-const extraSize = 80;
-export const LIVES_PACMAN = 3;
+// TODO: FER UN COFIG GAME AMB TOTES LES DADES DEL JOC
+// const mapActual = [
+//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+//   [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+//   [1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 11, 2, 0, 1],
+//   [1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+//   [1, 0, 0, 0, 0, 0, 0, 11, 0, 0, 6, 0, 0, 1],
+//   [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+//   [1, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 14, 1],
+//   [1, 11, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+//   [1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 1],
+//   [1, 11, 0, 0, 2, 1, 0, 1, 1, 0, 11, 0, 0, 1],
+//   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+//   [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+//   [1, 15, 2, 0, 2, 0, 0, 0, 0, 11, 0, 2, 4, 1],
+//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+// ];
+
+// const ROWS = 14;
+// const COLUMNS = 14;
+// export const IMAGE_SIZE = 32;
+// export const myConfig.getwidthCanvas() = 448;
+// export const HEIGHT_CANVAS = 448; // IMAGE_SIZE * ROWS
+// const extraSize = 80;
+// export const LIVES_PACMAN = 3;
+// const MAX_LEVEL = 3;
+export let myConfig = new ConfigGameClass();
+const videsPacman = myConfig.getlivesPacman();
+console.log(videsPacman);
+
+const mapActualActual = myConfig.getLevelmapActual(0);
 
 let imgRock;
 let imgEsferas;
@@ -126,29 +135,29 @@ function handleImage(msg) {
  */
 function setup() { // s'executa una vegada
   // numberImagesLoaded = 4; i numberErrorSound = 0;
-  createCanvas(WIDTH_CANVAS, HEIGHT_CANVAS + extraSize).parent("sketch-pacman");
-  for (let filaActual = 0; filaActual < ROWS; filaActual++) {
-    for (let columnaActual = 0; columnaActual < COLUMNS; columnaActual++) {
-      if (map[filaActual][columnaActual] === 1) {
+  createCanvas(myConfig.getwidthCanvas(), myConfig.getheightCanvas() + myConfig.getextraSizeHeight).parent("sketch-pacman");
+  for (let filaActual = 0; filaActual < myConfig.getrows(); filaActual++) {
+    for (let columnaActual = 0; columnaActual < myConfig.getcolumns(); columnaActual++) {
+      if (mapActual[filaActual][columnaActual] === 1) {
         const roca = new GameObject(filaActual, columnaActual);
         console.log(`He creat roca a posicio fila ${filaActual}i columna ${columnaActual}`);
         arrRocks.push(roca);
-      } else if (map[filaActual][columnaActual] === 2) {
+      } else if (mapActual[filaActual][columnaActual] === 2) {
         const menjar = new Food(filaActual, columnaActual); // GameObject(filaActual, columnaActual);
         console.log(`He creat food a posicio fila ${filaActual}i columna ${columnaActual}`);
         arrFood.push(menjar);
-      } else if (map[filaActual][columnaActual] === 3) {
+      } else if (mapActual[filaActual][columnaActual] === 3) {
         myGoku = new Goku(filaActual, columnaActual);
         console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
-      } else if (map[filaActual][columnaActual] === 11) {
+      } else if (mapActual[filaActual][columnaActual] === 11) {
         const freezer = new Freezer(filaActual, columnaActual);
         console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
         arrFreezer.push(freezer);
-      } else if (map[filaActual][columnaActual] === 6) {
+      } else if (mapActual[filaActual][columnaActual] === 6) {
         myGoku = new Goku(filaActual, columnaActual);
         const powerUp = new PowerUp(filaActual, columnaActual);
         arrPowerUp.push(powerUp);
-      } else if (map[filaActual][columnaActual] === 15) {
+      } else if (mapActual[filaActual][columnaActual] === 15) {
         const templo = new GameObject(filaActual, columnaActual);
         console.log(`He creat templo a posicio fila ${filaActual}i columna ${columnaActual}`);
         arrTemplo.push(templo);

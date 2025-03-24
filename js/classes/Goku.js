@@ -1,5 +1,6 @@
 import { GameObject } from "./GameObject.js";
-import { IMAGE_SIZE, WIDTH_CANVAS, HEIGHT_CANVAS, LIVES_PACMAN } from "../sketch.js";
+// import { this.IMAGE_SIZE, this.WIDTH_CANVAS, HEIGHT_CANVAS, LIVES_PACMAN } from "../sketch.js";
+import { myConfig } from "../sketch.js";
 import { Freezer } from "./Freezer.js";
 import { Food } from "./Food.js";
 import { PowerUp } from "./PowerUp.js";
@@ -18,6 +19,9 @@ export class Goku extends GameObject {
     this.pacmanLive = LIVES_PACMAN;
     this.widthCanvasPacman = 128;
     this.pacmanDiametre = 32;
+    this.IMAGE_SIZE = myConfig.getimageSize();
+    this.WIDTH_CANVAS = myConfig.getWidthCanvas();
+    this.HEIGHT_CANVAS = myConfig.getHeightCanvas();
 
     this.powerUpActive = false;
     this.powerUpTimer = 0;
@@ -33,7 +37,7 @@ export class Goku extends GameObject {
    */
   moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordXPixels + this.speedPacman;
-    if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
+    if (temp >= this.this.WIDTH_CANVAS - this.this.IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
       console.log("Error, no es pot moure a la dreta");
     } else {
       this.direction = 1;
@@ -87,7 +91,7 @@ export class Goku extends GameObject {
    */
   moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordYPixels + this.speedPacman;
-    if (temp >= WIDTH_CANVAS - IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
+    if (temp >= this.WIDTH_CANVAS - this.IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
       console.log("Error, no es pot moure a baix");
     } else {
       this.direction = 4;
