@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registre</title>
+    <link rel="stylesheet" href="../css/normalized.css">
+    <link rel="stylesheet" href="../css/registre.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body class="w3-light-grey">
+    <div class="menu">
+        <ul>
+            <li><a href="../index.html">Index</a></li>
+            <li><a href="login.html">Log in</a></li>
+            <li><a href="credits.html">Credits</a></li>
+            <li><a href="help.html">Com jugar</a></li>
+            <li><a href="pacMan.html">Jugar</a></li>
+            <li><a href="informacio.html">Informacio sistema</a></li>
+        </ul>
+    </div>
+
+    <div class="w3-container" style="margin-top: 150px; margin-left: 35%;">
+        <div class="w3-card-4 w3-white w3-padding-32 w3-margin-auto" style="max-width: 400px;">
+            <form id="registerForm" action="" method="post" class="w3-container">
+                <div class="w3-row-padding">
+                    <div class="w3-half w3-margin-bottom">
+                        <input id="username" class="w3-input w3-border w3-round" type="text" name="username" placeholder="First name" required>
+                        <div id="error-username" class="error"></div>
+                    </div>
+                    <div class="w3-half w3-margin-bottom">
+                        <input id="cognom" class="w3-input w3-border w3-round" type="text" name="cognom" placeholder="Last name" required>
+                        <div id="error-cognom" class="error"></div>
+                    </div>
+                </div>
+
+                <div class="w3-margin-bottom">
+                    <input id="email" class="w3-input w3-border w3-round" type="email" name="email" placeholder="Email" required>
+                    <div id="error-email" class="error"></div>
+                </div>
+
+                <div class="w3-margin-bottom">
+                    <input id="password" class="w3-input w3-border w3-round" type="password" name="password" placeholder="New password" required>
+                    <div id="error-password" class="error"></div>
+                </div>
+
+                <div class="w3-center w3-margin-top">
+                    <button class="w3-button w3-teal w3-round-large w3-padding-large" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../js/registre.js"></script>
+</body>
+
+</html>

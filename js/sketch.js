@@ -25,6 +25,20 @@ const map = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
+const users = [
+  { posicio: 1, name: "pere", points: 10000 },
+  { posicio: 2, name: "joan", points: 9000 },
+  { posicio: 3, name: "laia", points: 8000 },
+  { posicio: 4, name: "marta", points: 7000 },
+  { posicio: 5, name: "josep", points: 6000 },
+  { posicio: 6, name: "marc", points: 5000 },
+  { posicio: 7, name: "laura", points: 4000 },
+  { posicio: 8, name: "joana", points: 3000 },
+  { posicio: 9, name: "jordi", points: 2000 },
+  { posicio: 10, name: "mireia", points: 1000 }
+  ];
+  
+
 const ROWS = 14;
 const COLUMNS = 14;
 export const IMAGE_SIZE = 32;
