@@ -67,13 +67,13 @@
 
         let storedUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-        function displayPlayers(num) {
+        function mostrarJugadors(num) {
             const tableBody = document.getElementById('taulaJugadors');
             tableBody.innerHTML = '';
 
-            const topPlayers = storedUsers.slice(0, num);
+            const jugadors = storedUsers.slice(0, num);
 
-            topPlayers.forEach(player => {
+            jugadors.forEach(player => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${player.posicio}</td>
@@ -86,7 +86,7 @@
 
         document.getElementById('numeroJugadors').addEventListener('change', function () {
             const num = parseInt(this.value);
-            displayPlayers(num);
+            mostrarJugadors(num);
         });
 
         function sortTable(field) {
@@ -96,14 +96,14 @@
                 return 0;
             });
             const num = parseInt(document.getElementById('numeroJugadors').value);
-            displayPlayers(num);
+            mostrarJugadors(num);
         }
 
         document.getElementById('sort-posicio').addEventListener('click', () => sortTable('posicio'));
         document.getElementById('sort-name').addEventListener('click', () => sortTable('name'));
         document.getElementById('sort-points').addEventListener('click', () => sortTable('points'));
 
-        displayPlayers(10);
+        mostrarJugadors(10);
     </script>
 
 </body>
