@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Millors Jugadors</title>
+</head>
+
+<body>
+
+    <select id="numeroJugadors">
+        <option value="10">10 Jugadors</option>
+        <option value="20">20 Jugadors</option>
+        <option value="30">30 Jugadors</option>
+    </select>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th id="sort-posicio">Posició</th>
+                <th id="sort-name">Nom</th>
+                <th id="sort-points">Punts</th>
+            </tr>
+        </thead>
+        <tbody id="taulaJugadors">
+        </tbody>
+    </table>
+
+    <script>
+        const users = [
+            { posicio: 1, name: "pere", points: 10000 },
+            { posicio: 2, name: "joan", points: 9000 },
+            { posicio: 3, name: "laia", points: 8000 },
+            { posicio: 4, name: "marta", points: 7000 },
+            { posicio: 5, name: "josep", points: 6000 },
+            { posicio: 6, name: "marc", points: 5000 },
+            { posicio: 7, name: "laura", points: 4000 },
+            { posicio: 8, name: "joana", points: 3000 },
+            { posicio: 9, name: "jordi", points: 2000 },
+            { posicio: 10, name: "mireia", points: 1000 },
+            { posicio: 11, name: "anna", points: 900 },
+            { posicio: 12, name: "pablo", points: 800 },
+            { posicio: 13, name: "sara", points: 700 },
+            { posicio: 14, name: "david", points: 600 },
+            { posicio: 15, name: "laura", points: 500 },
+            { posicio: 16, name: "marc", points: 400 },
+            { posicio: 17, name: "josep", points: 300 },
+            { posicio: 18, name: "marta", points: 200 },
+            { posicio: 19, name: "joan", points: 100 },
+            { posicio: 20, name: "pere", points: 50 },
+            { posicio: 21, name: "laia", points: 40 },
+            { posicio: 22, name: "jordi", points: 30 },
+            { posicio: 23, name: "joana", points: 20 },
+            { posicio: 24, name: "mireia", points: 10 },
+            { posicio: 25, name: "anna", points: 5 },
+            { posicio: 26, name: "pablo", points: 4 },
+            { posicio: 27, name: "sara", points: 3 },
+            { posicio: 28, name: "david", points: 2 },
+            { posicio: 29, name: "laura", points: 1 },
+            { posicio: 30, name: "marc", points: 0 }
+        ];
+
+        if (typeof window !== 'undefined' && !localStorage.getItem('users')) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        let storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+        function displayPlayers(num) {
+            const tableBody = document.getElementById('taulaJugadors');
+            tableBody.innerHTML = '';
+
+            const topPlayers = storedUsers.slice(0, num);
+
+            topPlayers.forEach(player => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${player.posicio}</td>
+                    <td>${player.name}</td>
+                    <td>${player.points}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        document.getElementById('numeroJugadors').addEventListener('change', function () {
+            const num = parseInt(this.value);
+            displayPlayers(num);
+        });
+
+        function sortTable(field) {
+            storedUsers.sort((a, b) => {
+                if (a[field] < b[field]) return -1;
+                if (a[field] > b[field]) return 1;
+                return 0;
+            });
+            const num = parseInt(document.getElementById('numeroJugadors').value);
+            displayPlayers(num);
+        }
+
+        document.getElementById('sort-posicio').addEventListener('click', () => sortTable('posicio'));
+        document.getElementById('sort-name').addEventListener('click', () => sortTable('name'));
+        document.getElementById('sort-points').addEventListener('click', () => sortTable('points'));
+
+        displayPlayers(10);
+    </script>
+
+</body>
+
+</html>
