@@ -1,4 +1,4 @@
-import { myConfig } from "../sketch.js";
+// import { myConfig } from "../sketch.js";
 
 export class GameObject {
   constructor(x, y) {
