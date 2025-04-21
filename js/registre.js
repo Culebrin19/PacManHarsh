@@ -34,7 +34,22 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
         valid = false;
     }
 
-    if (!valid) {
-        event.preventDefault(); 
+    if (valid) {
+        let usuaris = JSON.parse(localStorage.getItem('usuaris')) || [];
+
+        const nouUsuari = {
+            username: username,
+            cognom: cognom,
+            email: email,
+            password: password
+        };
+
+        usuaris.push(nouUsuari);
+
+        localStorage.setItem('usuaris', JSON.stringify(usuaris));
+
+        alert('Usuari registrat correctament!');
+
+        window.location.href = "login.html";
     }
 });
