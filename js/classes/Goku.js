@@ -1,14 +1,8 @@
 import { GameObject } from "./GameObject.js";
-// import { this.IMAGE_SIZE, this.WIDTH_CANVAS, HEIGHT_CANVAS, LIVES_PACMAN } from "../sketch.js";
 import { myConfig } from "../sketch.js";
 import { Freezer } from "./Freezer.js";
 import { Food } from "./Food.js";
 import { PowerUp } from "./PowerUp.js";
-
-/**
- * @class Goku
- * @extends GameObject
- */
 
 export class Goku extends GameObject {
   constructor(y, x) {
@@ -16,28 +10,17 @@ export class Goku extends GameObject {
     this.direction = 1;
     this.speedPacman = 32;
     this.score = 0;
-    this.pacmanLive = LIVES_PACMAN;
-    this.widthCanvasPacman = 128;
-    this.pacmanDiametre = 32;
+    this.pacmanLive = myConfig.getLivesPacman(); // Reemplazo de LIVES_PACMAN
     this.IMAGE_SIZE = myConfig.getimageSize();
     this.WIDTH_CANVAS = myConfig.getWidthCanvas();
     this.HEIGHT_CANVAS = myConfig.getHeightCanvas();
-
     this.powerUpActive = false;
-    this.powerUpTimer = 0;
-    this.powerUpDuration = 10000;
+    this.doblePunts = false;
   }
 
-  /**
-   * @function moveRight mou cap a la dreta i comprova si colisiona amb una roca o si es menja un food.
-   * Té els següents parametres:
-   * @param arrFood
-   * @param arrRocks
-   * @param arrFreezer
-   */
   moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordXPixels + this.speedPacman;
-    if (temp >= this.this.WIDTH_CANVAS - this.this.IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
+    if (temp >= this.WIDTH_CANVAS - this.IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
       console.log("Error, no es pot moure a la dreta");
     } else {
       this.direction = 1;
@@ -46,13 +29,6 @@ export class Goku extends GameObject {
     }
   }
 
-  /**
-   * @function moveLeft mou cap a l'esquerra i comprova si colisiona amb una roca o si es menja un food.
-   * Té els següents parametres:
-   * @param arrFood
-   * @param arrRocks
-   * @param arrFreezer
-   */
   moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordXPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
@@ -64,13 +40,6 @@ export class Goku extends GameObject {
     }
   }
 
-  /**
-   * @function moveUp mou cap a dalt i comprova si colisiona amb una roca o si es menja un food.
-   * Té els següents parametres:
-   * @param arrFood
-   * @param arrRocks
-   * @param arrFreezer
-   */
   moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordYPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
@@ -82,16 +51,9 @@ export class Goku extends GameObject {
     }
   }
 
-  /**
-   * @function moveDown mou cap a baix i comprova si colisiona amb una roca o si es menja un food.
-   * Té els següents parametres:
-   * @param arrFood
-   * @param arrRocks
-   * @param arrFreezer
-   */
   moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordYPixels + this.speedPacman;
-    if (temp >= this.WIDTH_CANVAS - this.IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
+    if (temp >= this.HEIGHT_CANVAS - this.IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
       console.log("Error, no es pot moure a baix");
     } else {
       this.direction = 4;
@@ -100,32 +62,18 @@ export class Goku extends GameObject {
     }
   }
 
-  /**
-   * @function testCollideRock comprova si colisiona amb una roca.
-   * En el cas de que si, mostra un missatge per consola de que ha colissionat amb una roca i el mou a la posicio inicial.
-   * Apart d'això, li resta una vida.
-   * Té els següents parametres:
-   * @param arrRocks
-   * @param newX
-   * @param newY
-   * @returns {boolean}
-   */
   testCollideRock(arrRocks, newX, newY) {
     for (const roca of arrRocks) {
       if (newX === roca.coordXPixels && newY === roca.coordYPixels) {
         console.log("Has colisionat amb una roca");
         this.pacmanLive--;
-        alert("Has xocat amb una roca, has perdut una vida, et queden " + this.pacmanLive + " vides")
+        alert(`Has xocat amb una roca, has perdut una vida, et queden ${this.pacmanLive} vides`);
 
-        /**
-         * En el cas de que les vides del pacman siguin 0, mostra un missatge per consola de que ha perdut totes les vides i li pregunta si vol tornar a jugar.
-         * En el cas de que si, recarrega la pagina, en el cas de que no, para el joc.
-         */
         if (this.pacmanLive <= 0) {
           if (confirm("Has perdut totes les vides, vols tornar a jugar?")) {
-            window.location.reload(); 
+            window.location.reload();
           } else {
-            noLoop(); 
+            noLoop();
           }
         }
         return true;
@@ -134,71 +82,39 @@ export class Goku extends GameObject {
     return false;
   }
 
-
-  // testCollideFood(arrFood) {
-  //   for (let i = 0; i < arrFood.length; i++) {
-  //     if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {
-  //       console.log("Has menjat food");
-  //       arrFood.splice(i, 1);
-  //     }
-  //   }
-  // }
-
-  /**
-   * @function eatFood comprova si el pacman ha menjat un food o una cirera.
-   * En el cas de que sigui un food, mostra un missatge per consola de que ha menjat un food/cirera i suma la puntuació.
-   * Té els següents parametres:
-   * @param arrFood
-   * @param arrFreezer
-   */
   eatFood(arrFood, arrFreezer, arrPowerUp) {
-    /**
-     * @var puntsExtra mutiplicara per 2 en el cas de que estigui true, i per 1  en el cas de que estigui false
-     */
-    let puntsExtra = this.doblePunts ? 2 : 1; 
-
-    for (let i = 0; i < arrFood.length; i++) {
-        if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {
-            console.log("Has menjat food");
-            this.score += arrFood[i].pointsFood * puntsExtra;
-            arrFood.splice(i, 1);
-            console.log(`Puntuacio actual: ${this.score}`);
-            break;
+    let puntsExtra = this.doblePunts ? 2 : 1;
+    const allItems = [...arrFood, ...arrFreezer, ...arrPowerUp];
+    
+    for (let i = 0; i < allItems.length; i++) {
+      if (this.coordXPixels === allItems[i].coordXPixels && this.coordYPixels === allItems[i].coordYPixels) {
+        if (allItems[i] instanceof Food) {
+          console.log("Has menjat food");
+          this.score += allItems[i].pointsFood * puntsExtra;
+        } else if (allItems[i] instanceof Freezer) {
+          console.log("Has menjat Freezer");
+          this.score += allItems[i].pointsCherry * puntsExtra;
+        } else if (allItems[i] instanceof PowerUp) {
+          console.log("Has recollit un Power-Up");
+          this.activatePowerUp();
         }
+
+        allItems.splice(i, 1);
+        console.log(`Puntuació actual: ${this.score}`);
+        break;
+      }
     }
+  }
 
-    for (let i = 0; i < arrFreezer.length; i++) {
-        if (this.coordXPixels === arrFreezer[i].coordXPixels && this.coordYPixels === arrFreezer[i].coordYPixels) {
-            console.log("Has menjat Freezer");
-            this.score += arrFreezer[i].pointsCherry * puntsExtra;
-            arrFreezer.splice(i, 1);
-            console.log(`Puntuacio actual: ${this.score}`);
-            break;
-        }
-    }
+  activatePowerUp() {
+    this.doblePunts = true;
+    console.log("Doble de punts activat");
+    document.getElementById("powerUpMessage").style.display = "block";
 
-    /**
-     * Primer compriva si s'ha menjat algun power up, en el cas de que si, l'elimina, canviar a true el power up, mostra el missatge 
-     * que esta ocult al index amb display none i despres de 10 segons el desactiva i oculta el missatge.
-     */
-
-    for (let i = 0; i < arrPowerUp.length; i++) {
-        if (this.coordXPixels === arrPowerUp[i].coordXPixels && this.coordYPixels === arrPowerUp[i].coordYPixels) {
-            console.log("Has recollit un Power-Up");
-            arrPowerUp.splice(i, 1); 
-
-            this.doblePunts = true;
-            console.log("Doble de punts activat");
-            document.getElementById("powerUpMessage").style.display = "block";
-
-            setTimeout(() => {
-                this.doblePunts = false;
-                console.log("Doble de punts desactivat");
-                document.getElementById("powerUpMessage").style.display = "none";
-            }, 10000);
-
-            break;
-        }
-    }
-}
+    setTimeout(() => {
+      this.doblePunts = false;
+      console.log("Doble de punts desactivat");
+      document.getElementById("powerUpMessage").style.display = "none";
+    }, 10000);
+  }
 }
