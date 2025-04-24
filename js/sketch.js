@@ -87,14 +87,14 @@ console.log("Boff");
  */
 function preload() { // tot lo pesat a preload
   // eslint-disable-next-line sonarjs/no-use-of-empty-return-value
-  imgRock = loadImage("../img/roca.png", handleImage("roca"), handleError);
-  imgEsferas = loadImage("../img/esferas.png", handleImage, handleError);
-  imgGoku = loadImage("../img/goku.png", handleImage, handleError);
-  imgFreezer = loadImage("../img/freezer4.png", handleImage, handleError);
+  imgRock = loadImage("../img/roca.png",() => handleImage("roca"), handleError);
+  imgEsferas = loadImage("../img/esferas.png", () => handleImage, handleError);
+  imgGoku = loadImage("../img/goku.png", () =>handleImage, handleError);
+  imgFreezer = loadImage("../img/freezer4.png", () =>handleImage, handleError);
   soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
   soundGoku = loadSound("../img/sounds/goku.mp3", handleSound, handleErrorSound);
-  imgPowerUp = loadImage("../img/rayo.png", handleImage, handleError);
-  imgTemplo = loadImage("../img/templo.png", handleImage, handleError);
+  imgPowerUp = loadImage("../img/rayo.png", () =>handleImage, handleError);
+  imgTemplo = loadImage("../img/templo.png", () =>handleImage, handleError);
 }
 
 /**
