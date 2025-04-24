@@ -338,7 +338,7 @@ function testFinishGame() {
     } else {
       alert("Gracies per jugar");
     }
-  } else if (timer >= 90) {
+  } else if (timer >= 10) {
     confirm("Fi del joc, has perdut");
     window.location.reload();
   }
