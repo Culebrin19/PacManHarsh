@@ -1,0 +1,46 @@
+.menu {
+    display: flex;
+    justify-content: center;
+    background-color: aquamarine;
+    border: 2px solid black;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu li {
+    padding: 14px 20px;
+    border-right: 2px solid black;
+    text-align: center;
+}
+
+.menu li:last-child {
+    border-right: none;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 14px;
+    transition: color 0.3s ease;
+}
+
+.menu li:hover {
+    background-color: black;
+}
+
+.menu a:hover {
+    color: white;
+}
+
+footer {
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-top: 6px solid black;
+    font-size: 1.3rem;
+}

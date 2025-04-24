@@ -14,19 +14,34 @@
 <body>
     <div class="menu">
         <ul>
-          <li><a href="../index.html">Index</a></li>
-          <li><a href="credits.html">Credits</a></li>
-          <li><a href="help.html">Com jugar</a></li>
-          <li><a href="pacMan.html">Jugar</a></li>
-          <li><a href="informacio.html">Informacio sistema</a></li>
+            <li><a href="../index.html">Index</a></li>
+            <li><a href="login.html">Log in</a></li>
+            <li><a href="registre.html">Registre</a></li>
+            <li><a href="credits.html">Credits</a></li>
+            <li><a href="help.html">Com jugar</a></li>
+            <li><a href="pacMan.html">Jugar</a></li>
+            <li><a href="informacio.html">Informacio sistema</a></li>
         </ul>
     </div>
+    <div id="missatgeLogin" class="w3-center w3-margin-top"></div>
+
+    <script>
+        const missatge = localStorage.getItem('loginMessage');
+        if (missatge) {
+            const div = document.getElementById('missatgeLogin');
+            div.textContent = missatge;
+            div.className = "w3-text-white w3-large w3-center w3-black";
+
+            localStorage.removeItem('loginMessage');
+        }
+    </script>
 
     <div class="container w3-display-middle">
         <h1>Com jugar</h1>
 
         <h2>Missió:</h2>
-        <p>Recollir totes les esferes, matar tots els Frezzers i entrar al temple. No podràs entrar sense agafar totes les esferes ni sense matar tots els Frezzers.</p>
+        <p>Recollir totes les esferes, matar tots els Frezzers i entrar al temple. No podràs entrar sense agafar totes
+            les esferes ni sense matar tots els Frezzers.</p>
 
         <h2>Tecles:</h2>
         <p>Utilitza les fletxes del teclat per moure't:</p>
