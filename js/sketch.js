@@ -86,7 +86,6 @@ console.log("Boff");
  * @function preload carrega totes les imatges i els sons del joc
  */
 function preload() { // tot lo pesat a preload
-  // eslint-disable-next-line sonarjs/no-use-of-empty-return-value
   imgRock = loadImage("../img/roca.png",() => handleImage("roca"), handleError);
   imgEsferas = loadImage("../img/esferas.png", () => handleImage, handleError);
   imgGoku = loadImage("../img/goku.png", () =>handleImage, handleError);
@@ -142,8 +141,8 @@ function handleImage(msg) {
  * També comença el temps del joc.
  */
 function setup() { // s'executa una vegada
-  createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight).parent("sketch-pacman");
-
+  // createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight).parent("sketch-pacman");
+  createCanvas(448, 448 + 80).parent("sketch-pacman");
   for (let filaActual = 0; filaActual < configGame.getRows(); filaActual++) {
     for (let columnaActual = 0; columnaActual < configGame.getColumns(); columnaActual++) {
       if (mapActual[filaActual][columnaActual] === 1) {
@@ -338,7 +337,7 @@ function testFinishGame() {
     } else {
       alert("Gracies per jugar");
     }
-  } else if (timer >= 10) {
+  } else if (timer >= 90) {
     confirm("Fi del joc, has perdut");
     window.location.reload();
   }
