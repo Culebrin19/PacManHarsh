@@ -5,6 +5,8 @@ export class ConfigGameClass {
     #extraSizeHeight;
     #rows;
     #columns;
+    #imageSize;
+    #speedPacman;
     #livesPacman;
     #maxLevel;
     #maps;
@@ -15,6 +17,8 @@ export class ConfigGameClass {
         this.#extraSizeHeight = 80;
         this.#rows = 14;
         this.#columns = 14;
+        this.#imageSize = 32;
+        this.#speedPacman = 32;
         this.#livesPacman = 3;
         this.#maxLevel = 3;
 
@@ -56,6 +60,14 @@ export class ConfigGameClass {
 
     getColumns() {
         return this.#columns;
+    }
+
+    getImageSize() {
+        return this.#imageSize;
+    }
+
+    getSpeedPacman() {
+        return this.#speedPacman;
     }
 
     getLivesPacman() {

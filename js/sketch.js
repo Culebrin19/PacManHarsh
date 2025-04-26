@@ -36,14 +36,14 @@ const mapActual = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-const ROWS = 14;
-const COLUMNS = 14;
-export const IMAGE_SIZE = 32;
+// const ROWS = 14;
+// const COLUMNS = 14;
+// export const IMAGE_SIZE = 32;
 // export const myConfig.getwidthCanvas() = 448;
-export const HEIGHT_CANVAS = 448; // IMAGE_SIZE * ROWS
-const extraSize = 80;
-export const LIVES_PACMAN = 3;
-const MAX_LEVEL = 3;
+// export const HEIGHT_CANVAS = 448; // IMAGE_SIZE * ROWS
+// const extraSize = 80;
+// export const LIVES_PACMAN = 3;
+// const MAX_LEVEL = 3;
 // export let myConfig = new ConfigGameClass();
 // const videsPacman = myConfig.getlivesPacman();
 // console.log(videsPacman);
@@ -141,7 +141,8 @@ function handleImage(msg) {
  * També comença el temps del joc.
  */
 function setup() { // s'executa una vegada
-  // createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight).parent("sketch-pacman");
+  createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight()).parent("sketch-pacman");
+  // console.log(configGame.getWidthCanvas(), configGame.getHeightCanvas(), configGame.getExtraSizeHeight());
   createCanvas(448, 448 + 80).parent("sketch-pacman");
   for (let filaActual = 0; filaActual < configGame.getRows(); filaActual++) {
     for (let columnaActual = 0; columnaActual < configGame.getColumns(); columnaActual++) {
