@@ -1,5 +1,3 @@
-import { User } from './User.js';
-
 document.getElementById('registerForm').addEventListener('submit', function (event) {
     let valid = true;
 
@@ -36,45 +34,22 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
         valid = false;
     }
 
-    const dataNaixement = document.getElementById('dataNaixement').value.trim();
-    if (dataNaixement === '') {
-        document.getElementById('error-dataNaixement').textContent = 'La data de naixement és obligatòria.';
-        valid = false;
-    } else {
-        const dataActual = new Date();
-        const dataNaixamentDate = new Date(dataNaixement);
-        if (dataNaixamentDate >= dataActual) {
-            document.getElementById('error-dataNaixement').textContent = 'La data de naixement no pot ser futura.';
-            valid = false;
-        }
-    }
-
     if (valid) {
         let usuaris = JSON.parse(localStorage.getItem('usuaris')) || [];
 
-        const nouUsuari = new User(username, cognom, dataNaixement, password);
+        const nouUsuari = {
+            username: username,
+            cognom: cognom,
+            email: email,
+            password: password
+        };
 
-        const usuariObjecte = {
-            username: nouUsuari.getNom(),
-            cognom: nouUsuari.getCognom(),
-            dataNaixement: nouUsuari.getDataNaixement(),
-            password: nouUsuari.getContrasenya()
-        }
-
-        // const nouUsuari = {
-        //     username: username,
-        //     cognom: cognom,
-        //     email: email,
-        //     password: password
-        // };
-
-        // usuaris.push(nouUsuari);
-        usuaris.push(usuariObjecte);
+        usuaris.push(nouUsuari);
 
         localStorage.setItem('usuaris', JSON.stringify(usuaris));
 
         alert('Usuari registrat correctament!');
 
-        window.location.href = "login.html";
+        window.location.href = "html/login.html";
     }
 });
