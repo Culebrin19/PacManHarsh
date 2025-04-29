@@ -3,17 +3,24 @@ import { myConfig } from "../sketch.js";
 import { Freezer } from "./Freezer.js";
 import { Food } from "./Food.js";
 import { PowerUp } from "./PowerUp.js";
+import { ConfigGameClass } from "./ConfigGameClass.js";
 
 export class Goku extends GameObject {
   constructor(y, x) {
     super(y, x);
+    this.config = new ConfigGameClass();
     this.direction = 1;
-    this.speedPacman = 32;
+    // this.speedPacman = 32;
+    this.speedPacman = this.config.getSpeedPacman();
     this.score = 0;
-    this.pacmanLive = myConfig.getLivesPacman(); // Reemplazo de LIVES_PACMAN
-    this.IMAGE_SIZE = myConfig.getimageSize();
-    this.WIDTH_CANVAS = myConfig.getWidthCanvas();
-    this.HEIGHT_CANVAS = myConfig.getHeightCanvas();
+    this.pacmanLive = this.config.getLivesPacman();
+    this.IMAGE_SIZE = this.config.getImageSize();
+    this.WIDTH_CANVAS = this.config.getWidthCanvas();
+    this.HEIGHT_CANVAS = this.config.getHeightCanvas();
+    // this.pacmanLive = myConfig.getLivesPacman();
+    // this.IMAGE_SIZE = myConfig.getimageSize();
+    // this.WIDTH_CANVAS = myConfig.getWidthCanvas();
+    // this.HEIGHT_CANVAS = myConfig.getHeightCanvas();
     this.powerUpActive = false;
     this.doblePunts = false;
   }
@@ -85,7 +92,7 @@ export class Goku extends GameObject {
   eatFood(arrFood, arrFreezer, arrPowerUp) {
     let puntsExtra = this.doblePunts ? 2 : 1;
     const allItems = [...arrFood, ...arrFreezer, ...arrPowerUp];
-    
+
     for (let i = 0; i < allItems.length; i++) {
       if (this.coordXPixels === allItems[i].coordXPixels && this.coordYPixels === allItems[i].coordYPixels) {
         if (allItems[i] instanceof Food) {
