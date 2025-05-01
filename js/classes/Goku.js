@@ -1,5 +1,5 @@
 import { GameObject } from "./GameObject.js";
-import { myConfig } from "../sketch.js";
+// import { myConfig } from "../sketch.js";
 import { Freezer } from "./Freezer.js";
 import { Food } from "./Food.js";
 import { PowerUp } from "./PowerUp.js";
