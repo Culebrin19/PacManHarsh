@@ -77,6 +77,18 @@ export class ConfigGameClass {
         this.#currentMap = this.#maps["mapa1"];
     }
 
+    getMap(mapName) {
+        return this.#maps[mapName] || null;
+      }
+    
+    setCurrentMap(mapName) {
+        if (this.#maps[mapName]) {
+          this.#currentMap = this.#maps[mapName];
+        } else {
+          console.error("Mapa no trobat:", mapName);
+        }
+      }
+
     getCurrentMap() {
         return this.#currentMap;
     }
