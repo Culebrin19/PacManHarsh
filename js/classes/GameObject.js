@@ -1,17 +1,21 @@
-import { IMAGE_SIZE } from "../sketch.js";
+// import { myConfig } from "../sketch.js";
+import { ConfigGameClass } from "./ConfigGameClass.js";
+
+const configGame = new ConfigGameClass();
+
 
 export class GameObject {
   constructor(x, y) {
     this.rowNumber = x;
     this.columnObjectNumber = y;
-    this.coordXPixels = x * IMAGE_SIZE;
-    this.coordYPixels = y * IMAGE_SIZE;
+    this.coordXPixels = x * configGame.getImageSize();
+    this.coordYPixels = y * configGame.getImageSize();
   }
 
   showObject(img) {
     if (this.coordXPixels == null || this.coordYPixels == null) {
-      this.coordXPixels = this.rowNumber * IMAGE_SIZE;
-      this.coordYPixels = this.columnObjectNumber * IMAGE_SIZE;
+      this.coordXPixels = this.rowNumber * configGame.getImageSize();
+      this.coordYPixels = this.columnObjectNumber * configGame.getImageSize();
     }
     image(img, this.coordXPixels, this.coordYPixels);
   }
