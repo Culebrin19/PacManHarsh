@@ -308,7 +308,7 @@ function testFinishGame() {
    */
 
   if (foodRecollit && frezzersRecollit && temple) {
-    noLoop();  
+    // noLoop();  
 
     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols continuar al seguent mapa?");
     if (theConfirm) {
