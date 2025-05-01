@@ -34,8 +34,9 @@ let configGame = new ConfigGameClass();
  * @constant mapActual es el mapActuala del joc, cada número representa un objtecte diferent
  */
 
-let mapActual = configGame.getCurrentMap();  // Obtenir el mapa actual
-
+let mapActual = localStorage.getItem("currentMap") 
+  ? JSON.parse(localStorage.getItem("currentMap")) 
+  : configGame.getCurrentMap(); // Obtenir el mapa actual
 // const mapActual = [
 //   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 //   [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -344,85 +345,51 @@ function testFinishGame() {
      * i en el cas de que es premi el botó de confirmar, recarrega la pàgina.
      */
 
-    //   if (foodRecollit && frezzersRecollit && temple) {
-    //     // noLoop();  
-
-    //     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols continuar al seguent mapa?");
+    //   if (foodRecollit && frezzersRecollit && temple) {   // condicio de si s'ha agaft tot el food, les esferes de drac i estàs al temple
+    //     noLoop();
+    //     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
     //     if (theConfirm) {
-    //         if (mapActual === 1) {
-    //           mapActual = 2;
-    //             reiniciarVariables();
-    //             loop(); 
-    //             location.reload();
-    //         } else if (mapActual === 2) {
-    //           mapActual = 3;
-    //             reiniciarVariables();
-    //             loop(); 
-    //             location.reload();
-    //         } else if (mapActual === 3) {
-    //             alert("Has completat tots els mapes. Enhorabona!");
-    //             mapActual = 1;
-    //             reiniciarVariables();
-    //             loop();
-    //             location.reload();
-    //         }
+    //       window.location.reload();
     //     } else {
-    //         // Si el jugador no quiere continuar, puedes terminar el juego
-    //         alert("Fi del joc. Gràcies per jugar!");
+    //       alert("Gracies per jugar");
     //     }
+    //   } else if (timer >= 90) {
+    //     confirm("Fi del joc, has perdut");
+    //     window.location.reload();
+    //   }
+    // } catch (error) {
+    //   console.error("Error comprovant final del joc:", error);
     // }
 
-  //   if (foodRecollit && frezzersRecollit && temple) {   // condicio de si s'ha agaft tot el food, les esferes de drac i estàs al temple
-  //     noLoop();
-  //     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
-  //     if (theConfirm) {
-  //       window.location.reload();
-  //     } else {
-  //       alert("Gracies per jugar");
-  //     }
-  //   } else if (timer >= 90) {
-  //     confirm("Fi del joc, has perdut");
-  //     window.location.reload();
-  //   }
-  // } catch (error) {
-  //   console.error("Error comprovant final del joc:", error);
-  // }
-
-  if (foodRecollit && frezzersRecollit && temple) {   // condició de si s'ha recollit tot el food, les esferes de drac i estàs al temple
-    noLoop();
-    if (mapActual === configGame.getCurrentMap()) {
-      if (mapActual === configGame.getMap("mapa1")) {
-        const theConfirm = confirm("Has completat el mapa 1! Vols continuar al mapa 2?");
+    if (foodRecollit && frezzersRecollit && temple) {   // condició de si s'ha recollit tot el food, les esferes de drac i estàs al temple
+      noLoop();
+      if (JSON.stringify(mapActual) === JSON.stringify(configGame.getMap("mapa1"))) {
+        const theConfirm = confirm("Has completat el mapa 1. Vols continuar al mapa 2?");
         if (theConfirm) {
-          // configGame.setCurrentMap("mapa2");
-          // mapActual = configGame.getCurrentMap();
           mapActual = configGame.getMap("mapa2");
-          window.location.reload();
-          reiniciarVariables();
-          loop();
+          localStorage.setItem("currentMap", JSON.stringify(mapActual)); 
+          window.location.reload(); 
         } else {
-          alert("Gràcies per jugar!");
+          alert("Gràcies per jugar");
         }
-      } else if (mapActual === configGame.getMap["mapa2"]) {
-        const theConfirm = confirm("Has completat el mapa 2! Vols continuar al mapa 3?");
+      } else if (JSON.stringify(mapActual) === JSON.stringify(configGame.getMap("mapa2"))) {
+        const theConfirm = confirm("Has completat el mapa 2. Vols continuar al mapa 3?");
         if (theConfirm) {
-          // configGame.setCurrentMap("mapa3");
-          // mapActual = configGame.getCurrentMap();
-          mapaActual = configGame.getMap("mapa3");
-          reiniciarVariables();
-          loop();
+          mapActual = configGame.getMap("mapa3");
+          localStorage.setItem("currentMap", JSON.stringify(mapActual));
+          window.location.reload(); 
         } else {
-          alert("Gràcies per jugar!");
+          alert("Gràcies per jugar");
         }
-      } else if (mapActual === configGame.getMap["mapa3"]) {
-        alert("Has completat tots els mapes. Enhorabona!");
-        window.location.reload();
+      } else if (JSON.stringify(mapActual) === JSON.stringify(configGame.getMap("mapa3"))) {
+        alert("Has completat tots els mapes");
+        localStorage.removeItem("currentMap"); 
+        window.location.reload(); 
       }
+    } else if (timer >= 90) {
+      confirm("Fi del joc, has perdut");
+      window.location.reload();
     }
-  } else if (timer >= 90) {
-    confirm("Fi del joc, has perdut");
-    window.location.reload();
-  }
   } catch (error) {
     console.error("Error comprovant final del joc:", error);
   }
