@@ -7,18 +7,32 @@ import { PowerUp } from "./classes/PowerUp.js";
 import { ConfigGameClass } from "./classes/ConfigGameClass.js";
 
 const configGame = new ConfigGameClass();
-export const myConfig = {
-  getLivesPacman: () => 3,
-  getimageSize: () => 32,
-  getWidthCanvas: () => 800,
-  getHeightCanvas: () => 600
-};
+// export const myConfig = {
+//     /**
+//    * Obté la quantitat de vides de Pacman
+//    * @returns {number} nombre de vides de Pacman
+//    */
+//   getLivesPacman: () => 3,
+
+//     /**
+//    * Obté la mida de les imatges
+//    * @returns {number} mida de les imatges
+//    */
+//   getimageSize: () => 32,
+
+//     /**
+//    * Obté l'amplada  del llenç
+//    * @returns {number} alçada del llenç
+//    */
+//   getWidthCanvas: () => 800,
+
+
+//   getHeightCanvas: () => 600
+// };
 
 /**
  * @constant mapActual es el mapActuala del joc, cada número representa un objtecte diferent
  */
-
-// TODO: FER UN COFIG GAME AMB TOTES LES DADES DEL JOC
 
 let mapActual = configGame.getCurrentMap();  // Obtener el mapa actual
 
@@ -89,14 +103,19 @@ console.log("Boff");
  * @function preload carrega totes les imatges i els sons del joc
  */
 function preload() { // tot lo pesat a preload
-  imgRock = loadImage("../img/roca.png",() => handleImage("roca"), handleError);
-  imgEsferas = loadImage("../img/esferas.png", () => handleImage, handleError);
-  imgGoku = loadImage("../img/goku.png", () =>handleImage, handleError);
-  imgFreezer = loadImage("../img/freezer4.png", () =>handleImage, handleError);
-  soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
-  soundGoku = loadSound("../img/sounds/goku.mp3", handleSound, handleErrorSound);
-  imgPowerUp = loadImage("../img/rayo.png", () =>handleImage, handleError);
-  imgTemplo = loadImage("../img/templo.png", () =>handleImage, handleError);
+  try {
+    imgRock = loadImage("../img/roca.png", () => handleImage("roca"), handleError);
+    imgEsferas = loadImage("../img/esferas.png", () => handleImage, handleError);
+    imgGoku = loadImage("../img/goku.png", () => handleImage, handleError);
+    imgFreezer = loadImage("../img/freezer4.png", () => handleImage, handleError);
+    soundFood = loadSound("../img/sounds/pacman_eatfruit.wav");
+    soundGoku = loadSound("../img/sounds/goku.mp3", handleSound, handleErrorSound);
+    imgPowerUp = loadImage("../img/rayo.png", () => handleImage, handleError);
+    imgTemplo = loadImage("../img/templo.png", () => handleImage, handleError);
+  } catch (error) {
+    console.error("Error general a preload:", error);
+    showError();
+  }
 }
 
 /**
@@ -144,30 +163,35 @@ function handleImage(msg) {
  * També comença el temps del joc.
  */
 function setup() { // s'executa una vegada
-  createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight()).parent("sketch-pacman");
-  for (let filaActual = 0; filaActual < configGame.getRows(); filaActual++) {
-    for (let columnaActual = 0; columnaActual < configGame.getColumns(); columnaActual++) {
-      if (mapActual[filaActual][columnaActual] === 1) {
-        const roca = new GameObject(filaActual, columnaActual);
-        arrRocks.push(roca);
-      } else if (mapActual[filaActual][columnaActual] === 2) {
-        const menjar = new Food(filaActual, columnaActual);
-        arrFood.push(menjar);
-      } else if (mapActual[filaActual][columnaActual] === 3) {
-        myGoku = new Goku(filaActual, columnaActual);
-      } else if (mapActual[filaActual][columnaActual] === 11) {
-        const freezer = new Freezer(filaActual, columnaActual);
-        arrFreezer.push(freezer);
-      } else if (mapActual[filaActual][columnaActual] === 6) {
-        const powerUp = new PowerUp(filaActual, columnaActual);
-        arrPowerUp.push(powerUp);
-      } else if (mapActual[filaActual][columnaActual] === 15) {
-        const templo = new GameObject(filaActual, columnaActual);
-        arrTemplo.push(templo);
+  try {
+    createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight()).parent("sketch-pacman");
+    for (let filaActual = 0; filaActual < configGame.getRows(); filaActual++) {
+      for (let columnaActual = 0; columnaActual < configGame.getColumns(); columnaActual++) {
+        if (mapActual[filaActual][columnaActual] === 1) {
+          const roca = new GameObject(filaActual, columnaActual);
+          arrRocks.push(roca);
+        } else if (mapActual[filaActual][columnaActual] === 2) {
+          const menjar = new Food(filaActual, columnaActual);
+          arrFood.push(menjar);
+        } else if (mapActual[filaActual][columnaActual] === 3) {
+          myGoku = new Goku(filaActual, columnaActual);
+        } else if (mapActual[filaActual][columnaActual] === 11) {
+          const freezer = new Freezer(filaActual, columnaActual);
+          arrFreezer.push(freezer);
+        } else if (mapActual[filaActual][columnaActual] === 6) {
+          const powerUp = new PowerUp(filaActual, columnaActual);
+          arrPowerUp.push(powerUp);
+        } else if (mapActual[filaActual][columnaActual] === 15) {
+          const templo = new GameObject(filaActual, columnaActual);
+          arrTemplo.push(templo);
+        }
       }
     }
+    startTimeGame = millis();
+  } catch (error) {
+    console.error("Error en setup:", error);
+    showError();
   }
-  startTimeGame = millis();
 }
 
 /**
@@ -219,22 +243,28 @@ for (let i = 0; i < arrFreezer.length; i++) {
  * @function testFinishGame es crida per comprovar si el joc ha acabat.
  */
 function draw() {
-  background(171, 248, 168);
-  arrRocks.forEach((roca) => roca.showObject(imgRock));
-  arrFood.forEach((menjar) => menjar.showObject(imgEsferas));
-  arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
-  myGoku.showObject(imgGoku);
-  arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
-  arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
-  arrTemplo.forEach((templo) => templo.showObject(imgTemplo));
-  textSize(20);
-  textAlign(LEFT, CENTER);
-  timer = floor((millis() - startTimeGame) / 1000);
-  // text(`Puntuació: ${myGoku.score}`, 10, HEIGHT_CANVAS + 30);
-  // text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
-  text(`Puntuació: ${myGoku.score}`, 10, configGame.getHeightCanvas() + 30);
-  text(`Temps: ${timer}`, 10, configGame.getHeightCanvas() + 60);
-  testFinishGame();
+  try {
+    background(171, 248, 168);
+    arrRocks.forEach((roca) => roca.showObject(imgRock));
+    arrFood.forEach((menjar) => menjar.showObject(imgEsferas));
+    arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
+    myGoku.showObject(imgGoku);
+    arrPowerUp.forEach((powerUp) => powerUp.showObject(imgPowerUp));
+    arrFreezer.forEach((freezer) => freezer.showObject(imgFreezer));
+    arrTemplo.forEach((templo) => templo.showObject(imgTemplo));
+    textSize(20);
+    textAlign(LEFT, CENTER);
+    timer = floor((millis() - startTimeGame) / 1000);
+    // text(`Puntuació: ${myGoku.score}`, 10, HEIGHT_CANVAS + 30);
+    // text(`Temps: ${timer}`, 10, HEIGHT_CANVAS + 60);
+    text(`Puntuació: ${myGoku.score}`, 10, configGame.getHeightCanvas() + 30);
+    text(`Temps: ${timer}`, 10, configGame.getHeightCanvas() + 60);
+    testFinishGame();
+  } catch (error) {
+    console.error("Error en draw:", error);
+    showError();
+    noLoop();
+  }
 }
 
 /**
@@ -242,22 +272,26 @@ function draw() {
  * Si es prem alguna que no es, mostra un error per consola.
  */
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW) {
-    myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundGoku.play();
-  } else if (keyCode === LEFT_ARROW) {
-    myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundGoku.play();
-  } else if (keyCode === UP_ARROW) {
-    myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundGoku.play();
-  } else if (keyCode === DOWN_ARROW) {
-    myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
-    soundGoku.play();
-  } else {
-    console.log("Error de tecla");
-    const error = new ErrorPacman(1, "Error de tecla");
-    error.toString();
+  try {
+    if (keyCode === RIGHT_ARROW) {
+      myGoku.moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp);
+      soundGoku.play();
+    } else if (keyCode === LEFT_ARROW) {
+      myGoku.moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp);
+      soundGoku.play();
+    } else if (keyCode === UP_ARROW) {
+      myGoku.moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp);
+      soundGoku.play();
+    } else if (keyCode === DOWN_ARROW) {
+      myGoku.moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp);
+      soundGoku.play();
+    } else {
+      console.log("Error de tecla");
+      const error = new ErrorPacman(1, "Error de tecla");
+      error.toString();
+    }
+  } catch (error) {
+    console.error("Error en keyPressed:", error.toString());
   }
 }
 
@@ -294,59 +328,62 @@ function reiniciarVariables() {
  * i després si està en la posicio del temple, en el cas de que si, acaba el jox.
  */
 function testFinishGame() {
+  try {
+    let foodRecollit = arrFood.length === 0;
+    let frezzersRecollit = arrFreezer.length === 0;
 
-  let foodRecollit = arrFood.length === 0;
-  let frezzersRecollit = arrFreezer.length === 0;
+    let temple = arrTemplo.some(templo =>
+      myGoku.coordXPixels === templo.coordXPixels && myGoku.coordYPixels === templo.coordYPixels
+    );
 
-  let temple = arrTemplo.some(templo =>
-    myGoku.coordXPixels === templo.coordXPixels && myGoku.coordYPixels === templo.coordYPixels
-  );
+    /**
+     * @constant theConfirm si es compleixen les condicions, mostra un missatge de confirmació per pantalla
+     * i en el cas de que es premi el botó de confirmar, recarrega la pàgina.
+     */
 
-  /**
-   * @constant theConfirm si es compleixen les condicions, mostra un missatge de confirmació per pantalla
-   * i en el cas de que es premi el botó de confirmar, recarrega la pàgina.
-   */
+    //   if (foodRecollit && frezzersRecollit && temple) {
+    //     // noLoop();  
 
-  if (foodRecollit && frezzersRecollit && temple) {
-    // noLoop();  
+    //     const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols continuar al seguent mapa?");
+    //     if (theConfirm) {
+    //         if (mapActual === 1) {
+    //           mapActual = 2;
+    //             reiniciarVariables();
+    //             loop(); 
+    //             location.reload();
+    //         } else if (mapActual === 2) {
+    //           mapActual = 3;
+    //             reiniciarVariables();
+    //             loop(); 
+    //             location.reload();
+    //         } else if (mapActual === 3) {
+    //             alert("Has completat tots els mapes. Enhorabona!");
+    //             mapActual = 1;
+    //             reiniciarVariables();
+    //             loop();
+    //             location.reload();
+    //         }
+    //     } else {
+    //         // Si el jugador no quiere continuar, puedes terminar el juego
+    //         alert("Fi del joc. Gràcies per jugar!");
+    //     }
+    // }
 
-    const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols continuar al seguent mapa?");
-    if (theConfirm) {
-        if (mapActual === 1) {
-          mapActual = 2;
-            reiniciarVariables();
-            loop(); 
-            location.reload();
-        } else if (mapActual === 2) {
-          mapActual = 3;
-            reiniciarVariables();
-            loop(); 
-            location.reload();
-        } else if (mapActual === 3) {
-            alert("Has completat tots els mapes. Enhorabona!");
-            mapActual = 1;
-            reiniciarVariables();
-            loop();
-            location.reload();
-        }
-    } else {
-        // Si el jugador no quiere continuar, puedes terminar el juego
-        alert("Fi del joc. Gràcies per jugar!");
+    if (foodRecollit && frezzersRecollit && temple) {   // condicio de si s'ha agaft tot el food, les esferes de drac i estàs al temple
+      noLoop();
+      const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
+      if (theConfirm) {
+        window.location.reload();
+      } else {
+        alert("Gracies per jugar");
+      }
+    } else if (timer >= 90) {
+      confirm("Fi del joc, has perdut");
+      window.location.reload();
     }
-}
-
-  // if (foodRecollit && frezzersRecollit && temple) {   // condicio de si s'ha agaft tot el food, les esferes de drac i estàs al temple
-  //   noLoop();
-  //   const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
-  //   if (theConfirm) {
-  //     window.location.reload();
-  //   } else {
-  //     alert("Gracies per jugar");
-  //   }
-  // } else if (timer >= 90) {
-  //   confirm("Fi del joc, has perdut");
-  //   window.location.reload();
-  // }
+  } catch (error) {
+    console.error("Error comprovant final del joc:", error);
+  }
 }
 
 globalThis.setup = setup;
