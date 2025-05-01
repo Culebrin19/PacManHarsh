@@ -146,7 +146,7 @@ function handleImage(msg) {
 function setup() { // s'executa una vegada
   createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight()).parent("sketch-pacman");
   // console.log(configGame.getWidthCanvas(), configGame.getHeightCanvas(), configGame.getExtraSizeHeight());
-  createCanvas(448, 448 + 80).parent("sketch-pacman");
+  // createCanvas(448, 448 + 80).parent("sketch-pacman");
   for (let filaActual = 0; filaActual < configGame.getRows(); filaActual++) {
     for (let columnaActual = 0; columnaActual < configGame.getColumns(); columnaActual++) {
       if (mapActual[filaActual][columnaActual] === 1) {

@@ -91,24 +91,33 @@ export class Goku extends GameObject {
 
   eatFood(arrFood, arrFreezer, arrPowerUp) {
     let puntsExtra = this.doblePunts ? 2 : 1;
-    const allItems = [...arrFood, ...arrFreezer, ...arrPowerUp];
-
-    for (let i = 0; i < allItems.length; i++) {
-      if (this.coordXPixels === allItems[i].coordXPixels && this.coordYPixels === allItems[i].coordYPixels) {
-        if (allItems[i] instanceof Food) {
-          console.log("Has menjat food");
-          this.score += allItems[i].pointsFood * puntsExtra;
-        } else if (allItems[i] instanceof Freezer) {
-          console.log("Has menjat Freezer");
-          this.score += allItems[i].pointsCherry * puntsExtra;
-        } else if (allItems[i] instanceof PowerUp) {
-          console.log("Has recollit un Power-Up");
-          this.activatePowerUp();
-        }
-
-        allItems.splice(i, 1);
+  
+    for (let i = 0; i < arrFood.length; i++) {
+      if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {
+        console.log("Has menjat food");
+        this.score += arrFood[i].pointsFood * puntsExtra;
+        arrFood.splice(i, 1);
         console.log(`Puntuació actual: ${this.score}`);
-        break;
+        return;
+      }
+    }
+  
+    for (let i = 0; i < arrFreezer.length; i++) {
+      if (this.coordXPixels === arrFreezer[i].coordXPixels && this.coordYPixels === arrFreezer[i].coordYPixels) {
+        console.log("Has menjat Freezer");
+        this.score += arrFreezer[i].pointsCherry * puntsExtra;
+        arrFreezer.splice(i, 1);
+        console.log(`Puntuació actual: ${this.score}`);
+        return;
+      }
+    }
+  
+    for (let i = 0; i < arrPowerUp.length; i++) {
+      if (this.coordXPixels === arrPowerUp[i].coordXPixels && this.coordYPixels === arrPowerUp[i].coordYPixels) {
+        console.log("Has recollit un Power-Up");
+        this.activatePowerUp();
+        arrPowerUp.splice(i, 1);
+        return;
       }
     }
   }
