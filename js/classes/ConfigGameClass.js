@@ -74,7 +74,7 @@ export class ConfigGameClass {
             ]
         };
 
-        this.#currentMap = this.#maps["mapa3"];
+        this.#currentMap = this.#maps["mapa1"];
     }
 
     getCurrentMap() {

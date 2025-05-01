@@ -169,39 +169,6 @@ function setup() { // s'executa una vegada
   }
   startTimeGame = millis();
 }
-  // numberImagesLoaded = 4; i numberErrorSound = 0;
-//   createCanvas(configGame.getWidthCanvas(), configGame.getHeightCanvas() + configGame.getExtraSizeHeight).parent("sketch-pacman");
-//   for (let filaActual = 0; filaActual < myConfig.getrows(); filaActual++) {
-//     for (let columnaActual = 0; columnaActual < myConfig.getcolumns(); columnaActual++) {
-//       if (mapActual[filaActual][columnaActual] === 1) {
-//         const roca = new GameObject(filaActual, columnaActual);
-//         console.log(`He creat roca a posicio fila ${filaActual}i columna ${columnaActual}`);
-//         arrRocks.push(roca);
-//       } else if (mapActual[filaActual][columnaActual] === 2) {
-//         const menjar = new Food(filaActual, columnaActual); // GameObject(filaActual, columnaActual);
-//         console.log(`He creat food a posicio fila ${filaActual}i columna ${columnaActual}`);
-//         arrFood.push(menjar);
-//       } else if (mapActual[filaActual][columnaActual] === 3) {
-//         myGoku = new Goku(filaActual, columnaActual);
-//         console.log(`He creat pacman a posicio fila ${filaActual}i columna ${columnaActual}`);
-//       } else if (mapActual[filaActual][columnaActual] === 11) {
-//         const freezer = new Freezer(filaActual, columnaActual);
-//         console.log(`He creat menjar en la posicio fila ${filaActual}i columna ${columnaActual}`);
-//         arrFreezer.push(freezer);
-//       } else if (mapActual[filaActual][columnaActual] === 6) {
-//         myGoku = new Goku(filaActual, columnaActual);
-//         const powerUp = new PowerUp(filaActual, columnaActual);
-//         arrPowerUp.push(powerUp);
-//       } else if (mapActual[filaActual][columnaActual] === 15) {
-//         const templo = new GameObject(filaActual, columnaActual);
-//         console.log(`He creat templo a posicio fila ${filaActual}i columna ${columnaActual}`);
-//         arrTemplo.push(templo);
-//       }
-//       console.log(arrRocks.length);
-//     }
-//     startTimeGame = millis();
-//   }
-// }
 
 /**
  * @function testCollideRock comprova si el pacman colisiona amb una roca.
@@ -310,6 +277,14 @@ function showError() {
   // remove();
 }
 
+function reiniciarVariables() {
+  foodRecollit = false;
+  frezzersRecollit = false;
+  temple = false;
+  // reinicia també posició del jugador o el que faci falta
+}
+
+
 /**
  * @function testFinishGame comprova si el joc ha acabat.
  * Pot acabar quan no queda més food, quan arriba al temps indicat o quan es queda sense vides.
@@ -331,18 +306,47 @@ function testFinishGame() {
    * @constant theConfirm si es compleixen les condicions, mostra un missatge de confirmació per pantalla
    * i en el cas de que es premi el botó de confirmar, recarrega la pàgina.
    */
-  if (foodRecollit && frezzersRecollit && temple) {   // condicio de si s'ha agaft tot el food, les esferes de drac i estàs al temple
-    noLoop();
-    const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
+
+  if (foodRecollit && frezzersRecollit && temple) {
+    noLoop();  
+
+    const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols continuar al seguent mapa?");
     if (theConfirm) {
-      window.location.reload();
+        if (mapActual === 1) {
+          mapActual = 2;
+            reiniciarVariables();
+            loop(); 
+            location.reload();
+        } else if (mapActual === 2) {
+          mapActual = 3;
+            reiniciarVariables();
+            loop(); 
+            location.reload();
+        } else if (mapActual === 3) {
+            alert("Has completat tots els mapes. Enhorabona!");
+            mapActual = 1;
+            reiniciarVariables();
+            loop();
+            location.reload();
+        }
     } else {
-      alert("Gracies per jugar");
+        // Si el jugador no quiere continuar, puedes terminar el juego
+        alert("Fi del joc. Gràcies per jugar!");
     }
-  } else if (timer >= 90) {
-    confirm("Fi del joc, has perdut");
-    window.location.reload();
-  }
+}
+
+  // if (foodRecollit && frezzersRecollit && temple) {   // condicio de si s'ha agaft tot el food, les esferes de drac i estàs al temple
+  //   noLoop();
+  //   const theConfirm = confirm("Has recollit tot el food i has arribat al temple, vols tornar a començar?");
+  //   if (theConfirm) {
+  //     window.location.reload();
+  //   } else {
+  //     alert("Gracies per jugar");
+  //   }
+  // } else if (timer >= 90) {
+  //   confirm("Fi del joc, has perdut");
+  //   window.location.reload();
+  // }
 }
 
 globalThis.setup = setup;
