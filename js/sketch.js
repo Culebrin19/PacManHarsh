@@ -420,6 +420,9 @@ function testFinishGame() {
     //   confirm("Fi del joc, has perdut");
     //   window.location.reload();
     // }
+  // } catch (error) {
+  //   console.error("Error comprovant final del joc:", error);
+  // }
 }
 
 globalThis.setup = setup;
