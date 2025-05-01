@@ -68,6 +68,6 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
 
         alert('Usuari registrat correctament!');
 
-        window.location.href = "login.html";
+        window.location.href = "../index.html";
     }
 });
