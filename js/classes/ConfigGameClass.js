@@ -77,6 +77,8 @@ export class ConfigGameClass {
         this.#currentMap = this.#maps["mapa1"];
     }
 
+    
+
     getMap(mapName) {
         return this.#maps[mapName] || null;
       }
