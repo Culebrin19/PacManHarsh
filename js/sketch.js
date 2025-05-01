@@ -31,12 +31,15 @@ let configGame = new ConfigGameClass();
 // };
 
 /**
- * @constant mapActual es el mapActuala del joc, cada número representa un objtecte diferent
+ * @constant mapActual es el mapActuala del joc, cada número representa un objtecte diferent.
+ * en el cas de que hi hagi algo guardat al localStorage, carrega el mapa del localstorage, en el cas de que no, carrega el que
+ * li arriba desde la classe configGame
  */
 
 let mapActual = localStorage.getItem("currentMap") 
   ? JSON.parse(localStorage.getItem("currentMap")) 
   : configGame.getCurrentMap(); // Obtenir el mapa actual
+
 // const mapActual = [
 //   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 //   [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
