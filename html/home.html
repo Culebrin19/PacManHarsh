@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <meta name="description" content="">
 
   <meta property="og:title" content="">
@@ -27,31 +27,40 @@
   <link rel="stylesheet" href="../css/normalized.css">
   <link rel="stylesheet" href="../css/estils.css">
 </head>
+<style>
+  body {
+    margin: 0;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+  }
+</style>
 
 <body>
   <div class="menu">
     <ul>
-      <ul>
-        <li><a href="home.html">Index</a></li>
-        <li><a href="login.html">Log in</a></li>
-        <li><a href="registre.html">Registre</a></li>
-        <li><a href="credits.html">Credits</a></li>
-        <li><a href="help.html">Com jugar</a></li>
-        <li><a href="pacMan.html">Jugar</a></li>
-        <li><a href="informacio.html">Informacio sistema</a></li>
-        <li><a href="jugadors.html">Llista jugadors</a></li>
-        <li id="logout" style="display: none;"><a href="#" id="logout-link">Logout</a></li>
-      </ul>
+      <li><a href="home.html">Index</a></li>
+      <li><a href="html/login.html">Log in</a></li>
+      <li><a href="html/registre.html">Registre</a></li>
+      <li><a href="html/credits.html">Credits</a></li>
+      <li><a href="html/help.html">Com jugar</a></li>
+      <li><a href="html/pacMan.html">Jugar</a></li>
+      <li><a href="html/informacio.html">Informacio sistema</a></li>
+      <li><a href="html/jugadors.html">Llista jugadors</a></li>
+      <li id="logout" style="display: none;"><a href="#" id="logout-link">Logout</a></li>
     </ul>
   </div>
 
-  <div id="sketch-pacman"></div>
-  <div id="error-holder"></div>
-  <div id="powerUpMessage" style="display: none;">
-    <h1>POWER UP ACTIU</h1>
+  <div>
+    <img src="../img/titol.png" alt="" style="height: 300px; width: 600px;">
+    <img src="../img/logo.jpeg" alt="" style="height: 600px; width: 800px;">
   </div>
-
-  <!-- <img src="img/packRight.png" alt="pacman"> -->
+  <footer id="dadesPersonals"><strong>&#169;2024 Harsh Kumar</strong></footer>
   <script>
     const usuariActual = localStorage.getItem('usuariActual');
     if (usuariActual) {
@@ -64,7 +73,7 @@
     document.getElementById('logout-link')?.addEventListener('click', function (e) {
       e.preventDefault();
       localStorage.removeItem('usuariActual');
-      location.href = "../index.html";
+      location.href = "../index.html"; 
     });
   </script>
 </body>
