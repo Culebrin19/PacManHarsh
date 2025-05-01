@@ -5,7 +5,18 @@ import { Food } from "./Food.js";
 import { PowerUp } from "./PowerUp.js";
 import { ConfigGameClass } from "./ConfigGameClass.js";
 
+/**
+ * @class Goku
+ * @extends GameObject
+ * Representa el personatge principal del joc (Goku)
+ */
 export class Goku extends GameObject {
+
+  /**
+ * @constructor
+ * @param {number} y - Coordenada Y inicial del personatge
+ * @param {number} x - Coordenada X inicial del personatge
+ */
   constructor(y, x) {
     super(y, x);
     this.config = new ConfigGameClass();
@@ -25,6 +36,13 @@ export class Goku extends GameObject {
     this.doblePunts = false;
   }
 
+  /**
+ * Mou el personatge cap a la dreta
+ * @param {Food[]} arrFood - Array d'objectes de menjar
+ * @param {GameObject[]} arrRocks - Array d'objectes de roques
+ * @param {Freezer[]} arrFreezer - Array d'objectes Freezer
+ * @param {PowerUp[]} arrPowerUp - Array d'objectes Power-Up
+ */
   moveRight(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordXPixels + this.speedPacman;
     if (temp >= this.WIDTH_CANVAS - this.IMAGE_SIZE || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
@@ -36,6 +54,13 @@ export class Goku extends GameObject {
     }
   }
 
+  /**
+ * Mou el personatge cap a l'esquerra
+ * @param {Food[]} arrFood - Array d'objectes de menjar
+ * @param {GameObject[]} arrRocks - Array d'objectes de roques
+ * @param {Freezer[]} arrFreezer - Array d'objectes Freezer
+ * @param {PowerUp[]} arrPowerUp - Array d'objectes Power-Up
+ */
   moveLeft(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordXPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, temp, this.coordYPixels)) {
@@ -47,6 +72,13 @@ export class Goku extends GameObject {
     }
   }
 
+  /**
+ * Mou el personatge cap amunt
+ * @param {Food[]} arrFood - Array d'objectes de menjar
+ * @param {GameObject[]} arrRocks - Array d'objectes de roques
+ * @param {Freezer[]} arrFreezer - Array d'objectes Freezer
+ * @param {PowerUp[]} arrPowerUp - Array d'objectes Power-Up
+ */
   moveUp(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordYPixels - this.speedPacman;
     if (temp < 0 || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
@@ -58,6 +90,13 @@ export class Goku extends GameObject {
     }
   }
 
+  /**
+ * Mou el personatge cap avall
+ * @param {Food[]} arrFood - Array d'objectes de menjar
+ * @param {GameObject[]} arrRocks - Array d'objectes de roques
+ * @param {Freezer[]} arrFreezer - Array d'objectes Freezer
+ * @param {PowerUp[]} arrPowerUp - Array d'objectes Power-Up
+ */
   moveDown(arrFood, arrRocks, arrFreezer, arrPowerUp) {
     const temp = this.coordYPixels + this.speedPacman;
     if (temp >= this.HEIGHT_CANVAS - this.IMAGE_SIZE || this.testCollideRock(arrRocks, this.coordXPixels, temp)) {
@@ -69,6 +108,13 @@ export class Goku extends GameObject {
     }
   }
 
+  /**
+ * Comprova si el personatge col·lisiona
+ * @param {GameObject[]} arrRocks - Array d'objectes de roques
+ * @param {number} newX - Nova coordenada X
+ * @param {number} newY - Nova coordenada Y
+ * @returns {boolean} - Retorna true si hi ha col·lisió, si no false
+ */
   testCollideRock(arrRocks, newX, newY) {
     for (const roca of arrRocks) {
       if (newX === roca.coordXPixels && newY === roca.coordYPixels) {
@@ -89,9 +135,15 @@ export class Goku extends GameObject {
     return false;
   }
 
+  /**
+ * Comprova si el personatge menja menjar, Freezer o un Power-Up
+ * @param {Food[]} arrFood - Array d'objectes de menjar
+ * @param {Freezer[]} arrFreezer - Array d'objectes Freezer
+ * @param {PowerUp[]} arrPowerUp - Array d'objectes Power-Up
+ */
   eatFood(arrFood, arrFreezer, arrPowerUp) {
     let puntsExtra = this.doblePunts ? 2 : 1;
-  
+
     for (let i = 0; i < arrFood.length; i++) {
       if (this.coordXPixels === arrFood[i].coordXPixels && this.coordYPixels === arrFood[i].coordYPixels) {
         console.log("Has menjat food");
@@ -101,7 +153,7 @@ export class Goku extends GameObject {
         return;
       }
     }
-  
+
     for (let i = 0; i < arrFreezer.length; i++) {
       if (this.coordXPixels === arrFreezer[i].coordXPixels && this.coordYPixels === arrFreezer[i].coordYPixels) {
         console.log("Has menjat Freezer");
@@ -111,7 +163,7 @@ export class Goku extends GameObject {
         return;
       }
     }
-  
+
     for (let i = 0; i < arrPowerUp.length; i++) {
       if (this.coordXPixels === arrPowerUp[i].coordXPixels && this.coordYPixels === arrPowerUp[i].coordYPixels) {
         console.log("Has recollit un Power-Up");
@@ -122,6 +174,9 @@ export class Goku extends GameObject {
     }
   }
 
+    /**
+   * Activa el Power-Up que duplica els punts durant 10 segons
+   */
   activatePowerUp() {
     this.doblePunts = true;
     console.log("Doble de punts activat");
