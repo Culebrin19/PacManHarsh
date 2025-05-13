@@ -16,14 +16,11 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
         valid = false;
     }
 
-    const cognom = document.getElementById('cognom').value.trim();
-    if (cognom === '') {
-        document.getElementById('error-cognom').textContent = 'El cognom és obligatori.';
+    const edat = document.getElementById('edat').value.trim();
+    if (edat === '') {
+        document.getElementById('error-edat').textContent = 'El edat és obligatori.';
         valid = false;
-    } else if (cognom.length < 3) {
-        document.getElementById('error-cognom').textContent = 'El cognom ha de tenir almenys 3 caràcters.';
-        valid = false;
-    }
+    } 
 
     const email = document.getElementById('email').value.trim();
     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/i;
@@ -38,36 +35,45 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
         valid = false;
     }
 
-    const dataNaixement = document.getElementById('dataNaixement').value.trim();
-    if (dataNaixement === '') {
-        document.getElementById('error-dataNaixement').textContent = 'La data de naixement és obligatòria.';
+    const pais = document.getElementById('pais').value.trim();
+    if (pais === '') {
+        document.getElementById('error-pais').textContent = 'La pais és obligatòria.';
         valid = false;
-    } else {
-        const dataActual = new Date();
-        const dataNaix = new Date(dataNaixement);
-        if (dataNaix >= dataActual) {
-            document.getElementById('error-dataNaixement').textContent = 'La data de naixement no pot ser futura.';
-            valid = false;
-        }
-    }
+    } 
 
     if (valid) {
-        let usuaris = JSON.parse(localStorage.getItem('usuaris')) || [];
+        // let usuaris = JSON.parse(localStorage.getItem('usuaris')) || [];
 
         const nouUsuari = {
             username: username,
-            cognom: cognom,
+            edat: edat,
             email: email,
             password: password,
-            dataNaixement: dataNaixement
+            pais: pais
         };
 
-        usuaris.push(nouUsuari);
+        fetch('http://localhost/harsh/v1/create_user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nouUsuari)
+        })
+        .then(response => {
+            if(response.ok) {
+                alert('Usuari registrat correctament');
+                window.location.href = "../index.html";
+            }else {
+                alert('Error al fer registre');
+            }
+        })
 
-        localStorage.setItem('usuaris', JSON.stringify(usuaris));
+        // usuaris.push(nouUsuari);
 
-        alert('Usuari registrat correctament!');
+        // localStorage.setItem('usuaris', JSON.stringify(usuaris));
 
-        window.location.href = "../index.html";
+        // alert('Usuari registrat correctament!');
+
+        // window.location.href = "../index.html";
     }
 });
