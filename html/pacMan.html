@@ -61,10 +61,28 @@
       });
     }
 
-    document.getElementById('logout-link')?.addEventListener('click', function (e) {
+   document.getElementById('logout-link')?.addEventListener('click', function (e) {
       e.preventDefault();
-      localStorage.removeItem('usuariActual');
-      location.href = "../index.html";
+      
+      const token = localStorage.getItem('token');
+
+      fetch('http://localhost/harsh/v1/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('usuariActual');
+          window.location.href = 'index.html';
+        } else {
+          console.error('Logout failed');
+        }
+      })
+      .catch(error => console.error('Error:', error));
     });
   </script>
 </body>
